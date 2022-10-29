@@ -14,6 +14,8 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    @yield('script')
+
     <title>
         @yield('title')
     </title>
@@ -33,8 +35,7 @@
 
             <a href="{{ url('home') }}" class="flex items-center">
 
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Logo_of_Bangladesh_Chhatra_League.svg/1200px-Logo_of_Bangladesh_Chhatra_League.svg.png"
-                    class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+                <img src="{{ url('/images/logo.png') }}" class="mr-3 h-6 sm:h-9" alt="TraffiChain Logo" />
 
                 <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">TraffiChain</span>
 
@@ -125,7 +126,7 @@
     <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
         <div class="sm:flex sm:items-center sm:justify-between">
             <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
-                {{-- <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-8" alt="Flowbite Logo"> --}}
+                <img src="{{ url('/images/logo.png') }}" class="mr-3 h-8" alt="TraffiChain Logo">
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">TraffiChain</span>
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">

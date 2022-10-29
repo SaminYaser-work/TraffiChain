@@ -1,4 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/loginMetaMask.js": "/js/loginMetaMask.js",
+    "/js/regM.js": "/js/regM.js",
     "/css/app.css": "/css/app.css"
 }

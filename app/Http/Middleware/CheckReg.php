@@ -31,6 +31,7 @@ class CheckReg
                     'lic' => 'required|int|digits:15|unique:App\Models\driver,LICENSE_NUMBER',
                     'issue' => 'required|date',
                     'exp' => 'required|date',
+                    'walletAddress' => 'required|string|unique:App\Models\driver,WALLET_ADDRESS',
                 ]
             );
         }

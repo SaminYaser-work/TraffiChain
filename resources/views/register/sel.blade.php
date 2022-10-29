@@ -7,7 +7,7 @@
 @section('content')
     <section class="flex justify-center align-middle gap-3">
 
-        <a href="{{ url('login/driver') }}"
+        <a href="{{ url('register/driver') }}"
             class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 Driver / Owner 🚘
@@ -18,7 +18,7 @@
         </a>
 
 
-        <a href="{{ url('login/police') }}"
+        <a href="{{ url('register/police') }}"
             class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 Police 👮
@@ -29,7 +29,7 @@
         </a>
 
 
-        <a href="{{ url('login/judge') }}"
+        <a href="{{ url('register/judge') }}"
             class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 Judge 🧑‍⚖️

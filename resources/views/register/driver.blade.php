@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('script')
+    <script type="text/javascript" src="{{ url('/js/regM.js') }}" defer></script>
+@endsection
+
+@section('title')
+    Register
+@endsection
+
 @section('header')
     Driver Registration 🚘
 @endsection
@@ -91,10 +99,30 @@
             </div>
         </div>
 
+        <div class="relative z-0 mb-6 w-full group">
+            <div class="relative w-full">
+                <input type="text" id="regMMInput" name="walletAddress"
+                    class="rounded-tl-lg rounded-bl-lg block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                    value="{{ old('walletAddress') }}" placeholder="Your Wallet Address">
+
+                <button type="button" id="regMMBtn" name="regMMBtn"
+                    class="cursor-pointer absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-orange-600 rounded-r-lg border border-orange-600 hover:bg-orange-900 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                    🦊
+                </button>
+            </div>
+
+            @if ($errors->has('walletAddress'))
+                <span class="text-red-600 text-xs">
+                    {{ $errors->first('walletAddress') }}
+                </span>
+            @endif
+        </div>
+
+
         <div class="flex items-center mb-5">
             <input id="terms" type="checkbox" value=""
                 class="w-4 h-4 text-blue-600 bg-blue-600 rounded border-gray-300 focus:ring-blue-500 selection:bg-blue-600">
-            <label for="link-checkbox" class="ml-2 text-xs font-medium text-gray-900 dark:text-gray-300">
+            <label for="terms" class="ml-2 text-xs font-medium text-gray-900 dark:text-gray-300">
                 I testify that, I have provided the <strong class="text-blue-500">correct information.</strong>
             </label>
         </div>

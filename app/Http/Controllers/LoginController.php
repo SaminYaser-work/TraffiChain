@@ -36,29 +36,22 @@ class LoginController extends Controller
         return view('login', $this->labels + ['showNewRegMsg' => true]);
     }
 
-    function checkLogin(Request $request)
+    function doLogin(Request $request)
     {
 
-        $request->session()->flush();
-        $checkData = DB::table('users')->where('mobile', $request->mobile)->where('company', $request->company)->first();
+        // $request->session()->flush();
+        $accType = $request->accType;
+        $data = DB::table($accType)->where('WALLET_ADDRESS', $request->walletAddress)->first();
 
-        if ($checkData) {
+        if ($data) {
 
-            $userInfo = [
-                'id' => $checkData->id,
-                'first_name' => $checkData->first_name,
-                'last_name' => $checkData->last_name,
-                'age' => $checkData->age,
-                'mobile' => $checkData->mobile,
-                'company' => $checkData->company
-            ];
 
-            $request->session()->put('userInfo', $userInfo);
+            $request->session()->put('userInfo', $data);
 
-            // return view('profile', $userInfo);
             return redirect('/profile');
         } else {
-            return view('login', $this->labels += ['showError' => true]);
+            session()->flash('showError', true);
+            return view('login.sel');
         }
     }
 

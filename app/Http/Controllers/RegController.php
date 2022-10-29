@@ -58,7 +58,7 @@ class RegController extends Controller
 
         if ($regType == 'driver'){
             $driver = new driver();
-            $driver->WALLET_ADDRESS = 'abc';
+            $driver->WALLET_ADDRESS = $request->walletAddress;
             $driver->NAME = $request->name;
             $driver->NID = $request->nid;
             $driver->LICENSE_NUMBER = $request->lic;
