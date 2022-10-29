@@ -109,11 +109,11 @@
 
 
 
-    <div class="flex justify-center items-center flex-col">
+    <div class="flex justify-center items-center flex-col my-10">
 
         <h1 class="text-3xl">@yield('header')</h1>
 
-        <main class="">
+        <main class="my-5 h-screen">
 
             @yield('content')
 

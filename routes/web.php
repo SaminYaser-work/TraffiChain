@@ -21,20 +21,28 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
-// Old syntax
-// Route::get('/hello', 'PageController@home');
 
-// New syntax
+// Home
 Route::get('/home', [PageController::class, 'home']);
 Route::get('/home/{age}', [PageController::class, 'setAge']);
 
-Route::get('/register', [RegController::class, 'register']);
-Route::post('/doregister', [RegController::class, 'doRegistration']);
 
+// Registration
+Route::get('/register', [RegController::class, 'register']);
+Route::get('/register/driver', [RegController::class, 'driverReg']);
+Route::get('/register/police', [RegController::class, 'policeReg']);
+Route::get('/register/judge', [RegController::class, 'judgeReg']);
+Route::post('/register', [RegController::class, 'doRegistration'])
+    ->middleware('checkReg');
+
+// Login
 Route::get('/login', [LoginController::class, 'login']);
-Route::get('/login-new-acc', [LoginController::class, 'loginAfterReg']);
+Route::get('/login/driver', [LoginController::class, 'login']);
+Route::get('/login/police', [LoginController::class, 'login']);
+Route::get('/login/judge', [LoginController::class, 'login']);
 Route::post('/login', [LoginController::class, 'checkLogin']);
 
+// Profile
 Route::get('/profile', [ProfileController::class, 'showProfile']);
 Route::post('/update', [ProfileController::class, 'updateProfile']);
 

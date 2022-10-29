@@ -11,11 +11,12 @@
         </div>
     @endisset
 
-    @isset($showNewRegMsg)
-        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
-            <span class="font-medium">Registration successful!</span> You can now login.
+    @if (session()->get('newAccount') == true)
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+            role="alert">
+            <span class="font-medium">Registration successful!</span> Login to your new account.
         </div>
-    @endisset
+    @endif
 
     <form action="/login" method="POST">
         @csrf

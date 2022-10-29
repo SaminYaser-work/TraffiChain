@@ -21,7 +21,14 @@ class LoginController extends Controller
 
     function login()
     {
-        return view('login', $this->labels);
+        return view('login.sel');
+    }
+
+    function driverLogin()
+    {
+        $this->labels['type'] = 'driver';
+        session()->put('loginType', 'driver');
+        return view('login.driver', $this->labels);
     }
 
     function loginAfterReg()
