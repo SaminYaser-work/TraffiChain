@@ -54,6 +54,7 @@ class LoginController extends Controller
     function logout() {
         session()->forget('userInfo');
         session()->forget('accType');
+        session()->forget('vehicleInfo');
         session()->put('_previous', url('login'));
         return redirect('login');
     }

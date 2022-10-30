@@ -21,7 +21,7 @@ class CreateDriverTable extends Migration
             $table->bigInteger('LICENSE_NUMBER')->unique();
             $table->date('LICENSE_ISSUE_DATE');
             $table->date('LICENSE_EXPIRY_DATE');
-            $table->integer('SCORE')->default(-1);
+            $table->integer('SCORE')->default(0);
         });
     }
 

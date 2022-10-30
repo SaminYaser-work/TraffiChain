@@ -46,6 +46,10 @@ Route::post('/login', [LoginController::class, 'doLogin']);
 // Profile
 Route::get('/profile', [ProfileController::class, 'showProfile'])
     ->middleware('checkLogin');
+
+Route::get('/profile/vehicle', [ProfileController::class, 'registerVehicleForm']);
+Route::post('/profile/vehicle', [ProfileController::class, 'registerVehicle']);
+
 Route::post('/update', [ProfileController::class, 'updateProfile']);
 
 // For debugging, remove this in production
