@@ -33,10 +33,11 @@ class CheckReg
                     'exp' => 'required|date|after:issue',
                     'walletAddress' => 'required|string|unique:App\Models\driver,WALLET_ADDRESS',
                 ]
+
             );
+            return $next($request);
         }
 
-
-        return $next($request);
+        return redirect('home');
     }
 }

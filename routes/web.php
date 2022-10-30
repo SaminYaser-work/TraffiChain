@@ -48,6 +48,9 @@ Route::get('/profile', [ProfileController::class, 'showProfile'])
     ->middleware('checkLogin');
 
 Route::get('/profile/vehicle', [ProfileController::class, 'registerVehicleForm']);
+Route::get('/profile/update', [ProfileController::class, 'updateProfileForm']);
+Route::post('/profile/update', [ProfileController::class, 'updateProfile'])
+    ->middleware('checkUpdate');
 Route::post('/profile/vehicle', [ProfileController::class, 'registerVehicle']);
 
 Route::post('/update', [ProfileController::class, 'updateProfile']);

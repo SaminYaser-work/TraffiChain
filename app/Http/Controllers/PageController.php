@@ -20,6 +20,11 @@ class PageController extends Controller
 
     function home()
     {
+
+        if(session()->has('userInfo')){
+            return redirect('profile');
+        }
+
         return view('Home')
             ->with("name", $this->name)
             ->with('age', $this->age)
