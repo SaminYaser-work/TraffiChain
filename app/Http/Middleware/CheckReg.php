@@ -30,7 +30,7 @@ class CheckReg
                     'nid' => 'required|int|digits:10|unique:App\Models\driver,NID',
                     'lic' => 'required|int|digits:15|unique:App\Models\driver,LICENSE_NUMBER',
                     'issue' => 'required|date',
-                    'exp' => 'required|date',
+                    'exp' => 'required|date|after:issue',
                     'walletAddress' => 'required|string|unique:App\Models\driver,WALLET_ADDRESS',
                 ]
             );

@@ -22,18 +22,14 @@ class LoginController extends Controller
     function login()
     {
         return view('login.sel');
+
+
     }
 
     function driverLogin()
     {
         $this->labels['type'] = 'driver';
-        session()->put('loginType', 'driver');
         return view('login.driver', $this->labels);
-    }
-
-    function loginAfterReg()
-    {
-        return view('login', $this->labels + ['showNewRegMsg' => true]);
     }
 
     function doLogin(Request $request)
@@ -45,7 +41,7 @@ class LoginController extends Controller
 
         if ($data) {
 
-
+            $request->session()->put('accType', $accType);
             $request->session()->put('userInfo', $data);
 
             return redirect('/profile');
@@ -55,6 +51,14 @@ class LoginController extends Controller
         }
     }
 
+    function logout() {
+        session()->forget('userInfo');
+        session()->forget('accType');
+        session()->put('_previous', url('login'));
+        return redirect('login');
+    }
+
+    // Delete this function
     function showInfo()
     {
         $data = DB::table('users')->get();

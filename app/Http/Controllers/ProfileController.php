@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\agents;
-
 class ProfileController extends Controller
 {
 
@@ -14,8 +12,10 @@ class ProfileController extends Controller
         $userInfo = session()->get('userInfo');
 
         if ($userInfo) {
-            return view('profile', $userInfo);
+            return view('profile.PDriver')
+                ->with('userInfo', $userInfo);
         } else {
+            // TODO: flash message at login page (You need to login first)
             return redirect('login');
         }
     }

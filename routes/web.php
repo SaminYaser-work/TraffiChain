@@ -37,13 +37,15 @@ Route::post('/register', [RegController::class, 'doRegistration'])
 
 // Login
 Route::get('/login', [LoginController::class, 'login']);
+Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/login/driver', [LoginController::class, 'login']);
 Route::get('/login/police', [LoginController::class, 'login']);
 Route::get('/login/judge', [LoginController::class, 'login']);
 Route::post('/login', [LoginController::class, 'doLogin']);
 
 // Profile
-Route::get('/profile', [ProfileController::class, 'showProfile']);
+Route::get('/profile', [ProfileController::class, 'showProfile'])
+    ->middleware('checkLogin');
 Route::post('/update', [ProfileController::class, 'updateProfile']);
 
 // For debugging, remove this in production
