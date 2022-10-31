@@ -52,7 +52,7 @@
                                 @endif
                             </td>
                             <td class="py-3 px-6">
-                                {{ $ticket->FINE_AMOUNT }}
+                                {{ $ticket->FINE_AMOUNT . ' BDT' }}
                             </td>
                             <td class="py-3 px-6">
                                 {{ $ticket->DUE_DATE }}
@@ -74,12 +74,17 @@
                     @endforeach
                 @else
                     <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <td class="py-3 px-6 col-span-6">
-                            You have no tickets. <br> Keep up the good work!
+                        <td class="py-3 px-6" colspan="9">
+                            You have no tickets.
                         </td>
                     </tr>
                 @endif
             </tbody>
         </table>
+    </div>
+
+    <div class="flex mt-10 justify-center items-end gap-6">
+        <a href="{{ url('/home') }}"
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Back</a>
     </div>
 @endsection

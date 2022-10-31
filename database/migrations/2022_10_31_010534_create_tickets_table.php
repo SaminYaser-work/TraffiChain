@@ -20,7 +20,6 @@ class CreateTicketsTable extends Migration
             $table->string('POLICE_WALLET_ADDRESS');
             $table->string('JUDGE_WALLET_ADDRESS')->nullable();
             $table->string('STATUS');
-            $table->float('FINE_AMOUNT');
             $table->date('DUE_DATE');
         });
     }

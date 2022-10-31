@@ -154,6 +154,32 @@ class ProfileController extends Controller
                 ->where('DRIVER_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
                 ->get();
 
+            // Calculating fine amount
+            foreach($ticketInfo as $ticket) {
+                // $ticket->ISSUE_DATE = date('d-m-Y', strtotime($ticket->ISSUE_DATE));
+                // $ticket->EXPIRY_DATE = date('d-m-Y', strtotime($ticket->EXPIRY_DATE));
+                $infractions = DB::table('infractions')
+                    ->where('CASE_SLIP_NUMBER', $ticket->CASE_SLIP_NUMBER)
+                    ->get();
+
+                $totalFine = 0;
+                foreach($infractions as $infraction) {
+
+                    $fine = DB::table('fines')
+                        ->where('INFRACTION_ID', $infraction->INFRACTION_ID)
+                        ->first()->FINE_AMOUNT;
+
+                    if($fine) {
+                        $totalFine += $fine;
+                    }
+                    else {
+                        $totalFine += 0;
+                    }
+                }
+                $ticket->FINE_AMOUNT = $totalFine;
+            }
+
+
             return view('profile.driver.citedTickets')
                 ->with('userInfo', $userInfo)
                 ->with('ticketInfo', $ticketInfo);

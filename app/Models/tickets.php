@@ -19,7 +19,6 @@ class tickets extends Model
         'DRIVER_WALLET_ADDRESS',
         'POLICE_WALLET_ADDRESS',
         'JUDGE_WALLET_ADDRESS',
-        'FINE_AMOUNT',
         'DUE_DATE',
     ];
 }
