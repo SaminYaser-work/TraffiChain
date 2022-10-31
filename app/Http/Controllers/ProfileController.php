@@ -29,9 +29,14 @@ class ProfileController extends Controller
                 ->where('registered_vehicles.OWNER_ID', $userInfo->id)
                 ->get();
 
-            return view('profile.PDriver')
+            $ticketInfo = DB::table('tickets')
+                ->where('DRIVER_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
+                ->get();
+
+            return view('profile.driver.PDriver')
                 ->with('userInfo', $userInfo)
-                ->with('vehicleInfo', $vehicleInfo);
+                ->with('vehicleInfo', $vehicleInfo)
+                ->with('ticketInfo', $ticketInfo);
         } else {
             // TODO: flash message at login page (You need to login first)
             return redirect('login');
@@ -140,4 +145,20 @@ class ProfileController extends Controller
 
     }
 
+    function showTickets()
+    {
+        $userInfo = $this->autheticate();
+
+        if ($userInfo) {
+            $ticketInfo = DB::table('tickets')
+                ->where('DRIVER_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
+                ->get();
+
+            return view('profile.driver.citedTickets')
+                ->with('userInfo', $userInfo)
+                ->with('ticketInfo', $ticketInfo);
+        } else {
+            return redirect('login');
+        }
+    }
 }

@@ -47,6 +47,7 @@ Route::post('/login', [LoginController::class, 'doLogin']);
 Route::get('/profile', [ProfileController::class, 'showProfile'])
     ->middleware('checkLogin');
 
+Route::get('/profile/tickets', [ProfileController::class, 'showTickets']);
 Route::get('/profile/vehicle', [ProfileController::class, 'registerVehicleForm']);
 Route::get('/profile/update', [ProfileController::class, 'updateProfileForm']);
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])
