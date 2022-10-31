@@ -3,7 +3,7 @@ const ethers = require("ethers");
 const regMMBtn = document.getElementById("regMMBtn");
 const regMMInput = document.getElementById("regMMInput");
 
-let signer = null;
+window.signer = null;
 
 regMMBtn.addEventListener("click", async function () {
     console.log("clicked");

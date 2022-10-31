@@ -23,6 +23,7 @@ class tcSeed extends Seeder
         $cop_wallet1 = '0x81a741D43F8A8A0576dcAf254E271C09841D9bbA';
 
         // Fines (MUST BE FILLED)
+        // TODO: Add description from https://dmp.gov.bd/penalties-under-motor-vehicle-ordinance/
         $fines = [
             137 => 200,
             139 => 100,

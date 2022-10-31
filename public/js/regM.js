@@ -27207,7 +27207,7 @@ var ethers = __webpack_require__(/*! ethers */ "./node_modules/ethers/lib.esm/in
 
 var regMMBtn = document.getElementById("regMMBtn");
 var regMMInput = document.getElementById("regMMInput");
-var signer = null;
+window.signer = null;
 regMMBtn.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
   var provider, address;
   return _regeneratorRuntime().wrap(function _callee$(_context) {

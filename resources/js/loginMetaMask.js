@@ -4,12 +4,12 @@ const sel = document.getElementById("accType");
 const btn = document.getElementById("loginBtn");
 const walletAddress = document.getElementById("walletAddress");
 const walletAddInput = document.getElementById("walletAddInput");
-const loginBtn = document.querySelector('button[type="submit"]');
+const loginBtn = document.getElementById("lBtn");
 
 btn.style.display = "none";
 walletAddInput.style.display = "none";
 loginBtn.style.display = "none";
-let signer = null;
+window.signer = null;
 
 sel.addEventListener("change", function () {
     if (sel.value != "...") {

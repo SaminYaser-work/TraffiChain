@@ -147,5 +147,7 @@
                 btn.disabled = true;
             }
         });
+
+        window.ethers && console.log('Ethers.js is loaded');
     </script>
 @endsection

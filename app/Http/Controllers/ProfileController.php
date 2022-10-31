@@ -177,12 +177,14 @@ class ProfileController extends Controller
                     }
                 }
                 $ticket->FINE_AMOUNT = $totalFine;
+
             }
 
 
             return view('profile.driver.citedTickets')
                 ->with('userInfo', $userInfo)
-                ->with('ticketInfo', $ticketInfo);
+                ->with('ticketInfo', $ticketInfo)
+                ->with('infractions', $infractions);
         } else {
             return redirect('login');
         }

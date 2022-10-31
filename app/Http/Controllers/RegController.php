@@ -56,6 +56,7 @@ class RegController extends Controller
             return dd(session()->all());
         }
 
+        // TODO: add other entities
         if ($regType == 'driver'){
             $driver = new driver();
             $driver->WALLET_ADDRESS = $request->walletAddress;

@@ -27209,11 +27209,11 @@ var sel = document.getElementById("accType");
 var btn = document.getElementById("loginBtn");
 var walletAddress = document.getElementById("walletAddress");
 var walletAddInput = document.getElementById("walletAddInput");
-var loginBtn = document.querySelector('button[type="submit"]');
+var loginBtn = document.getElementById("lBtn");
 btn.style.display = "none";
 walletAddInput.style.display = "none";
 loginBtn.style.display = "none";
-var signer = null;
+window.signer = null;
 sel.addEventListener("change", function () {
   if (sel.value != "...") {
     btn.style.display = "block";
