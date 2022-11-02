@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -50,7 +51,9 @@ class RegController extends Controller
 
     function doRegistration(Request $request)
     {
+
         $regType = session()->pull('regType');
+
 
         if (!$regType) {
             return dd(session()->all());
@@ -58,6 +61,8 @@ class RegController extends Controller
 
         // TODO: add other entities
         if ($regType == 'driver'){
+
+
             $driver = new driver();
             $driver->WALLET_ADDRESS = $request->walletAddress;
             $driver->NAME = $request->name;
@@ -74,6 +79,15 @@ class RegController extends Controller
 
         session()->flash('newAccount', true);
 
-        return redirect('/login');
+        return response()->json([
+            'walletAddress' => $request->walletAddress,
+            'name' => $request->name,
+            'nid' => $request->nid,
+            'lic' => $request->lic,
+            'issue' => strtotime($request->issue),
+            'exp' => strtotime($request->exp)
+        ], 200);
+
+        // return redirect('/login');
     }
 }

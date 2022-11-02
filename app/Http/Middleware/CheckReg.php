@@ -35,6 +35,11 @@ class CheckReg
                 ]
 
             );
+
+            // if ($validator->fails()) {
+            //     return response()->json($validator->messages(), Response::HTTP_BAD_REQUEST);
+            // }
+
             return $next($request);
         }
 

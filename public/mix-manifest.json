@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/js/loginMetaMask.js": "/js/loginMetaMask.js",
     "/js/regM.js": "/js/regM.js",
+    "/js/contractInfo.js": "/js/contractInfo.js",
     "/css/app.css": "/css/app.css"
 }

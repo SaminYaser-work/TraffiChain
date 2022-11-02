@@ -1,0 +1,74 @@
+{
+  "contractName": "Vehicle",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Vehicle.sol\":\"Vehicle\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Vehicle.sol\":{\"keccak256\":\"0x413dfd768bfa1ac3e09fae5b9ff91574ced11b0bfdec0a7ebee15fdd2a6022ee\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c8d5d30e9d819b0e027f51bfc0b2880bb7a2e95a0c3f0f4a4833a869e62f4c43\",\"dweb:/ipfs/QmUVXV1XkDnSXXqWE5YJ4gds2RGtaytuvQzT3UH4jT6BTh\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220734f2ca9e9013fcf96792153821993a53814082b4050a68507f281ea3bb25c1264736f6c63430008110033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220734f2ca9e9013fcf96792153821993a53814082b4050a68507f281ea3bb25c1264736f6c63430008110033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "57:449:10:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "57:449:10:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.17;\n\ncontract Vehicle {\n    // enum Status {\n    //     normal,\n    //     impounded,\n    //     decommissioned\n    // }\n\n    // enum Class {\n    //     sedan,\n    //     suv,\n    //     microbus,\n    //     minibus,\n    //     bus\n    // }\n\n    // string private immutable i_chassisNo;\n    // string private immutable i_name;\n    // Status private status;\n    // Class private class;\n\n    // constructor(string memory name, string memory chassisNo, )\n\n}\n",
+  "sourcePath": "C:\\Users\\samin\\Documents\\Projects\\AWT\\TraffiChain\\contracts\\Vehicle.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/Vehicle.sol",
+    "exportedSymbols": {
+      "Vehicle": [
+        1201
+      ]
+    },
+    "id": 1202,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1200,
+        "literals": [
+          "solidity",
+          "0.8",
+          ".17"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:10"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Vehicle",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 1201,
+        "linearizedBaseContracts": [
+          1201
+        ],
+        "name": "Vehicle",
+        "nameLocation": "66:7:10",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1202,
+        "src": "57:449:10",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:475:10"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.10",
+  "updatedAt": "2022-11-02T05:56:43.508Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

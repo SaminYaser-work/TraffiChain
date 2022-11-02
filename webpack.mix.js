@@ -14,4 +14,5 @@ const mix = require("laravel-mix");
 mix.js("resources/js/app.js", "public/js")
     .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
     .js("resources/js/loginMetaMask.js", "public/js/loginMetaMask.js")
-    .js("resources/js/regM.js", "public/js/regM.js");
+    .js("resources/js/regM.js", "public/js/regM.js")
+    .js("resources/js/contractInfo.js", "public/js/contractInfo.js");
