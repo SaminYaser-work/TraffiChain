@@ -1,0 +1,1 @@
+const deployedTicketFactoryContractAddress = "0xB017397912C021Ca50389d00117D96b6262fb3dd"; export default deployedTicketFactoryContractAddress;

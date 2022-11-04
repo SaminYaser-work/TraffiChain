@@ -188,8 +188,11 @@
                             data.exp
                         );
 
+                        <?php session()->flash('newAccount', true); ?>
 
-                        // window.location.href = '/login';
+                        window.location.href = '/login';
+
+
                     } catch (e) {
                         console.log(e);
                         btn.textContent = 'Register';
@@ -222,7 +225,26 @@
             const res = await window.driverContractFactory.createNewDriverProfile(wallet, name, nid, lic, issue,
                 exp);
 
+            // Testing
             console.log(res);
+
+
+
+            // const depContractAddress = await window.driverContractFactory.getDriverProfile(
+            //     wallet
+            // );
+
+            // console.log(depContractAddress);
+
+            // const driverProfile = new ethers.Contract(
+            //     depContractAddress,
+            //     window.driverContractABI,
+            //     window.systemSigner
+            // );
+
+            // const driverName = await driverProfile.getName();
+
+            // console.log(driverName);
         }
     </script>
 @endsection

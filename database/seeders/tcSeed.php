@@ -53,8 +53,8 @@ class tcSeed extends Seeder
         DB::table('driver')->insert([
             'WALLET_ADDRESS' => $wallet,
             'NAME' => 'Samin',
-            'NID' => rand(1111111111, 9999999999),
-            'LICENSE_NUMBER' => rand(111111111111111, 999999999999999),
+            'NID' => '1111111111',
+            'LICENSE_NUMBER' => '1111111111111111',
             'LICENSE_ISSUE_DATE' => '2021-10-29',
             'LICENSE_EXPIRY_DATE' => '2022-10-29',
             'SCORE' => '50',

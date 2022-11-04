@@ -7,30 +7,30 @@
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "57:449:10:-:0;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "57:449:10:-:0;;;;;",
+  "sourceMap": "57:449:11:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "57:449:11:-:0;;;;;",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.17;\n\ncontract Vehicle {\n    // enum Status {\n    //     normal,\n    //     impounded,\n    //     decommissioned\n    // }\n\n    // enum Class {\n    //     sedan,\n    //     suv,\n    //     microbus,\n    //     minibus,\n    //     bus\n    // }\n\n    // string private immutable i_chassisNo;\n    // string private immutable i_name;\n    // Status private status;\n    // Class private class;\n\n    // constructor(string memory name, string memory chassisNo, )\n\n}\n",
   "sourcePath": "C:\\Users\\samin\\Documents\\Projects\\AWT\\TraffiChain\\contracts\\Vehicle.sol",
   "ast": {
     "absolutePath": "project:/contracts/Vehicle.sol",
     "exportedSymbols": {
       "Vehicle": [
-        1201
+        1677
       ]
     },
-    "id": 1202,
+    "id": 1678,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1200,
+        "id": 1676,
         "literals": [
           "solidity",
           "0.8",
           ".17"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:10"
+        "src": "32:23:11"
       },
       {
         "abstract": false,
@@ -39,20 +39,20 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 1201,
+        "id": 1677,
         "linearizedBaseContracts": [
-          1201
+          1677
         ],
         "name": "Vehicle",
-        "nameLocation": "66:7:10",
+        "nameLocation": "66:7:11",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1202,
-        "src": "57:449:10",
+        "scope": 1678,
+        "src": "57:449:11",
         "usedErrors": []
       }
     ],
-    "src": "32:475:10"
+    "src": "32:475:11"
   },
   "compiler": {
     "name": "solc",
@@ -60,7 +60,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-02T05:56:43.508Z",
+  "updatedAt": "2022-11-04T13:23:17.292Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

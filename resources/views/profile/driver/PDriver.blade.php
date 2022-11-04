@@ -103,38 +103,64 @@
 
 
 
-            <div class="flex justify-center items-center flex-col">
-                @if ($ticketInfo->count() == 0)
-                    <p class="text-green-600">You currently have</p>
-                    <div class="grid place-items-center mb-5">
-                        <p class="text-6xl lg:text-8xl text-green-600">0</p>
-                    </div>
-                    <p class="text-green-600">issued tickets.</p>
-                    <p class="text-green-600">Keep up the good work.</p>
-                @else
-                    <p class="text-red-600">You currently have</p>
-                    <div class="grid place-items-center mb-5">
-                        <p class="text-6xl lg:text-8xl text-red-600">{{ $ticketInfo->count() }}</p>
-                    </div>
-                    <p class="text-red-600">issued tickets.</p>
-                @endif
+
+            <div class="flex justify-center items-center flex-col" id="noTickets">
+                <p>You currently have</p>
+                <div class="grid place-items-center mb-5">
+                    <p class="text-6xl lg:text-8xl" id="ticketCounter">
+                    </p>
+                </div>
+                <p class="">issued tickets.</p>
+                <p class="text-green-600 hidden" id="goodText">Keep up the good work.</p>
             </div>
 
 
 
 
-            @if ($ticketInfo->count() > 0)
-                <a href="{{ url('profile/tickets') }}" class="mt-3 inline-flex items-center text-blue-600 hover:underline">
-                    Resolve Tickets
-                    <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z">
-                        </path>
-                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z">
-                        </path>
-                    </svg>
-                </a>
-            @endif
+            <a href="{{ url('profile/tickets') }}" class="mt-3 inline-flex items-center text-blue-600 hover:underline">
+                <span id="linkText">
+                </span>
+                <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z">
+                    </path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z">
+                    </path>
+                </svg>
+            </a>
+
+            <script>
+                (async () => {
+                    const tickets = await window.ticketContractFactory.getActiveTickets(
+                        '<?php echo $userInfo->WALLET_ADDRESS; ?>'
+                    );
+                    console.log('tickets: ', tickets);
+
+                    const numOfTickets = tickets.length;
+                    const ticketCounter = document.getElementById('ticketCounter');
+                    const noTickets = document.getElementById('noTickets');
+                    const linkText = document.getElementById('linkText');
+                    const goodText = document.getElementById('goodText');
+
+                    ticketCounter.textContent = numOfTickets;
+
+                    if (numOfTickets == 0) {
+                        // ticketCounter.classList.remove('text-red-600');
+                        // ticketCounter.classList.add('text-green-600');
+                        noTickets.classList.add('text-green-600');
+                        noTickets.classList.remove('text-red-600');
+                        linkText.textContent = 'See History';
+                        goodText.classList.remove('hidden');
+                    } else {
+                        noTickets.classList.add('text-red-600');
+                        noTickets.classList.remove('text-green-600');
+                        // ticketCounter.classList.remove('text-green-600');
+                        // ticketCounter.classList.add('text-red-600');
+                        linkText.textContent = 'Resolve Tickets';
+                        // goodText.classList.add('hidden');
+                    }
+                })();
+            </script>
 
         </div>
 

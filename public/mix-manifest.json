@@ -3,5 +3,7 @@
     "/js/loginMetaMask.js": "/js/loginMetaMask.js",
     "/js/regM.js": "/js/regM.js",
     "/js/contractInfo.js": "/js/contractInfo.js",
+    "/js/driverFactoryAddress.js": "/js/driverFactoryAddress.js",
+    "/js/ticketFactoryAddress.js": "/js/ticketFactoryAddress.js",
     "/css/app.css": "/css/app.css"
 }

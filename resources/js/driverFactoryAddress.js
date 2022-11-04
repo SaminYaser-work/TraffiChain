@@ -1,0 +1,1 @@
+const deployedDriverFactoryContractAddress = "0xF48193E4170cCD6786E6FFd3fA947f94040B4bfB"; export {deployedDriverFactoryContractAddress};

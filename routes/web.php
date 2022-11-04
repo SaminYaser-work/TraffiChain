@@ -56,5 +56,10 @@ Route::post('/profile/vehicle', [ProfileController::class, 'registerVehicle']);
 
 Route::post('/update', [ProfileController::class, 'updateProfile']);
 
-// For debugging, remove this in production
+// TODO: Add custom 404 view
+Route::fallback(function () {
+    redirect('/');
+});
+
+// TODO: For debugging, remove this in production
 Route::get('/loggedin', [LoginController::class, 'showInfo']);

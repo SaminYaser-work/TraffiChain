@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
+// TODO: Implement access control
+
 contract Driver {
 
     string private name;
-    uint256 private immutable licenseNo;
+    uint256 private immutable i_licenseNo;
     uint256 private immutable i_NID;
     uint256 private immutable i_lic_issue_date;
-    uint256 private i_lic_exp_date;
+    uint256 private lic_exp_date;
     uint16 private score;
 
     constructor(
@@ -19,9 +21,9 @@ contract Driver {
     ) {
         i_NID = NID;
         name = _name;
-        licenseNo = _licenseNo;
+        i_licenseNo = _licenseNo;
         i_lic_issue_date = issue_date;
-        i_lic_exp_date = exp_date;
+        lic_exp_date = exp_date;
     }
 
     function changeName(string memory _name) external {
@@ -32,7 +34,31 @@ contract Driver {
         score = _score;
     }
 
+    function updateExpDate(uint256 _lic_exp_date) external {
+        lic_exp_date = _lic_exp_date;
+    }
+
     function getName() external view returns(string memory) {
         return name;
+    }
+
+    function getNID() external view returns(uint256) {
+        return i_NID;
+    }
+
+    function getLicNo() external view returns(uint256) {
+        return i_licenseNo;
+    }
+
+    function getLicIssueDate() external view returns(uint256) {
+        return i_lic_issue_date;
+    }
+
+    function getLicExpDate() external view returns(uint256) {
+        return lic_exp_date;
+    }
+
+    function getScore() external view returns(uint16) {
+        return score;
     }
 }

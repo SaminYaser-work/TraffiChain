@@ -15,4 +15,16 @@ mix.js("resources/js/app.js", "public/js")
     .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
     .js("resources/js/loginMetaMask.js", "public/js/loginMetaMask.js")
     .js("resources/js/regM.js", "public/js/regM.js")
-    .js("resources/js/contractInfo.js", "public/js/contractInfo.js");
+    .js("resources/js/contractInfo.js", "public/js/contractInfo.js")
+    .js(
+        "resources/js/driverFactoryAddress.js",
+        "public/js/driverFactoryAddress.js"
+    )
+    .js(
+        "resources/js/ticketFactoryAddress.js",
+        "public/js/ticketFactoryAddress.js"
+    )
+    .js(
+        "resources/js/InfractionsAddress.js",
+        "public/js/InfractionsAddress.js"
+    );

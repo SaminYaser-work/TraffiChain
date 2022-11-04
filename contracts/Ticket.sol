@@ -17,8 +17,16 @@ contract Ticket is AccessControl {
     // Events
     event StatusChanged(address ticket_address, Status status);
 
+    // Pending: Ticket is issued and driver can pay the fine
+    // Late: Driver has been late with the payment
+    // Paid: Driver has paid the fine and ticket is closed
+    // Cancelled: Ticket is cancelled by the police due to some reason
+    // disputing: Ticket is being disputed in the court by the request of the driver
+    // dismissed: Ticket is dismissed by the court
+    // unresolvable: ???
     enum Status {
         pending,
+        late,
         paid,
         cancelled,
         disputing,
@@ -29,20 +37,19 @@ contract Ticket is AccessControl {
     // Roles
     bytes32 private constant DRIVER_ROLE = keccak256("DRIVER_ROLE");
     bytes32 private constant OFFICER_ROLE = keccak256("OFFICER_ROLE");
-    bytes32 private constant OWNER_ROLE = keccak256("OWNER_ROLE");
     bytes32 private constant JUDGE_ROLE = keccak256("JUDGE_ROLE");
     bytes32 private constant CANCEL_TICKET_ROLE = keccak256("CANCEL_TICKET_ROLE");
 
     // Attributes
-    address private immutable owner;
     address private immutable driver;
     address private immutable officer;
     address private judge;
     uint16[] private penalty_clasues;
     uint256 private lastTimeStamp;
-    uint256 private constant interval = 30 days;
+    uint256 private interval = 30 days;
+    uint256 private strikes = 0;
     Status private status;
-    bool private isActive = true;
+    bool private isActive = true; // ticket is active or not
 
     modifier checkActive{
         require(isActive);
@@ -50,13 +57,11 @@ contract Ticket is AccessControl {
     }
 
     constructor(
-        address owner_,
         address driver_,
         uint16[] memory penalty_clasues_
         )
     {
 
-        owner = owner_;
         driver = driver_;
         officer = msg.sender;
         judge = address(0);
@@ -66,7 +71,6 @@ contract Ticket is AccessControl {
 
         status = Status.pending;
 
-        _setupRole(OWNER_ROLE, owner_);
         _setupRole(DRIVER_ROLE, driver_);
         _setupRole(OFFICER_ROLE, msg.sender);
         _setupRole(CANCEL_TICKET_ROLE, msg.sender);
@@ -74,29 +78,30 @@ contract Ticket is AccessControl {
 
     /// @notice Owner can request a hearing in court
     /// @dev must provide wallet address of the judge
-    function requestHearing(address judge_) public checkActive onlyRole(OWNER_ROLE) {
+    function requestHearing(address judge_) public checkActive onlyRole(DRIVER_ROLE) {
         require(isPayable());
 
         judge = judge_;
         _grantRole(JUDGE_ROLE, judge_);
 
-        _revokeRole(CANCEL_TICKET_ROLE, officer);
+        _revokeRole(CANCEL_TICKET_ROLE, officer); // officer can't cancel the ticket anymore
         status = Status.disputing;
 
         emit StatusChanged(address(this), status);
     }
 
-    function checkStatus() external view returns(uint256) {
+    function checkStatus() external view returns(string memory) {
 
-        return uint256(status);
-        // // Ugly but gas efficient
-        // if (status == Status.pending) return "Pending";
-        // if (status == Status.dismissed) return "Dismissed";
-        // if (status == Status.disputing) return "Disputing";
-        // if (status == Status.paid) return "Paid";
-        // if (status == Status.cancelled) return "Cancelled";
-        // if (status == Status.unresolvable) return "Unresolvalble";
-        // return "Error";
+        // return uint256(status);
+        // Ugly but gas efficient
+        if (status == Status.pending) return "Pending";
+        if (status == Status.late) return "Late";
+        if (status == Status.dismissed) return "Dismissed";
+        if (status == Status.disputing) return "Disputing";
+        if (status == Status.paid) return "Paid";
+        if (status == Status.cancelled) return "Cancelled";
+        if (status == Status.unresolvable) return "Unresolvalble";
+        return "Error";
     }
 
     /// @notice Resolves the ticket for good.
@@ -107,7 +112,6 @@ contract Ticket is AccessControl {
         // Revoke all roles
         _revokeRole(CANCEL_TICKET_ROLE, officer);
         _revokeRole(DRIVER_ROLE, driver);
-        _revokeRole(OWNER_ROLE, owner);
         _revokeRole(OFFICER_ROLE, officer);
         _revokeRole(CANCEL_TICKET_ROLE, officer);
         if(judge != address(0)) {
@@ -117,15 +121,20 @@ contract Ticket is AccessControl {
         emit StatusChanged(address(this), status);
     }
 
+    /// @dev set interval in days
+    function setInterval(uint256 interval_) external checkActive onlyRole(OFFICER_ROLE) {
+        interval = interval_;
+    }
+
     function isPayable() public view returns(bool) {
-        if (status == Status.pending) {
+        if (status == Status.pending || status == Status.late) {
             return (block.timestamp - lastTimeStamp) < interval ? true : false;
         }
         return false;
     }
 
-    function getOwnerAddress() external view returns(address) {
-        return owner;
+    function isTicketActive() external view returns(bool) {
+        return isActive;
     }
 
     function getDriverAddress() external view returns(address) {
@@ -146,6 +155,7 @@ contract Ticket is AccessControl {
     function getCharges() external view returns(uint16[] memory) {
         return penalty_clasues;
     }
+
 
     function getRemainingTime() external view returns(uint256) {
         if(!isActive) {
