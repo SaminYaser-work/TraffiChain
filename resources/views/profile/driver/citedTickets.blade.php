@@ -5,13 +5,16 @@
 @endsection
 
 @section('header')
-    Tickets Cited to {{ $userInfo->NAME }}
+    Tickets Cited to
+    <span class="font-bold">
+        {{ $userInfo->NAME }}
+    </span>
 @endsection
 
 @section('content')
     <div id="modal" tabindex="-1" aria-hidden="true"
-        class="hidden overflow-y-auto overflow-x-hidden fixed top-1/2 right-1/2 left-1/2 z-50 w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        class="hidden overflow-y-auto overflow-x-hidden absolute left-0 right-0 mx-auto z-50 w-full md:h-full">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto mx-auto">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
@@ -117,9 +120,12 @@
 
                         payTicketBtn.addEventListener('click', async () => {
                             payTicketBtn.textContent = 'Please Wait...';
-                            await ticketContract.resolveTicket(2);
-                            // modal.classList.toggle('hidden');
-                            // refresh page
+                            try {
+                                await ticketContract.resolveTicket(2);
+                            } catch (e) {
+                                console.log(e);
+                                alert('Something went wrong. Please try again later.');
+                            }
                             location.reload();
                         });
 
@@ -127,7 +133,7 @@
                     (async () => {
                         const tbody = document.querySelector('tbody');
 
-                        const tickets = await window.ticketContractFactory.getActiveTickets(
+                        const tickets = await window.ticketContractFactory.getAllTickets(
                             '<?php echo $userInfo->WALLET_ADDRESS; ?>'
                         );
                         console.log('tickets: ', tickets);
@@ -157,7 +163,14 @@
                             // console.log(res2);
                             const fineAmount = await window.infractionContract.calculateTotalFine(charges);
 
-                            const deadline = await ticketContract.getRemainingTime();
+                            let deadline = '';
+                            try {
+                                deadline = await ticketContract.getRemainingTime();
+                                deadline = format_time(deadline);
+                            } catch (e) {
+                                console.log('Ticket already resolved');
+                                deadline = 'N/A';
+                            }
 
                             const status = await ticketContract.checkStatus();
 
@@ -166,7 +179,7 @@
                                 policeWalletAddress.slice(0, 5) + '***' + policeWalletAddress.slice(-5),
                                 judgeWalletAddress,
                                 fineAmount.toString() + ' BDT',
-                                format_time(deadline),
+                                deadline,
                                 status
                             ];
 

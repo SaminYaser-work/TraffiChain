@@ -15,15 +15,15 @@
     "absolutePath": "project:/contracts/Vehicle.sol",
     "exportedSymbols": {
       "Vehicle": [
-        1677
+        1690
       ]
     },
-    "id": 1678,
+    "id": 1691,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1676,
+        "id": 1689,
         "literals": [
           "solidity",
           "0.8",
@@ -39,15 +39,15 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 1677,
+        "id": 1690,
         "linearizedBaseContracts": [
-          1677
+          1690
         ],
         "name": "Vehicle",
         "nameLocation": "66:7:11",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1678,
+        "scope": 1691,
         "src": "57:449:11",
         "usedErrors": []
       }
@@ -60,7 +60,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-04T13:23:17.292Z",
+  "updatedAt": "2022-11-04T14:12:01.281Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

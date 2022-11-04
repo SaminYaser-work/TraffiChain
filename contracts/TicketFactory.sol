@@ -82,6 +82,10 @@ contract TicketFactory {
         return activeTickets;
     }
 
+    function getAllTickets(address driver) external view returns(address[] memory) {
+        return driverToTickets[driver];
+    }
+
     function getAddress() external view returns(address) {
         return address(this);
     }

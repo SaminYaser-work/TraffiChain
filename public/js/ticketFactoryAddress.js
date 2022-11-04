@@ -41,7 +41,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "deployedTicketFactoryContractAddress": () => (/* binding */ deployedTicketFactoryContractAddress)
 /* harmony export */ });
-var deployedTicketFactoryContractAddress = "0x3E2B3e6D04c6B6F63bd0ACacFA896309129Da85D";
+var deployedTicketFactoryContractAddress = "0xB11F8fd47AeCE2d57B908F3EdBa8556dA12787F2";
 
 /******/ })()
 ;
