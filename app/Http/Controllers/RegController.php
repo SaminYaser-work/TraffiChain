@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\driver;
+use App\Models\judge;
 
 class RegController extends Controller
 {
@@ -59,7 +60,8 @@ class RegController extends Controller
             return dd(session()->all());
         }
 
-        // TODO: add other entities
+        session()->flash('newAccount', true);
+
         if ($regType == 'driver'){
 
 
@@ -75,19 +77,38 @@ class RegController extends Controller
             $driver->SCORE = rand(0, 100);
 
             $driver->save();
+
+            return response()->json([
+                'walletAddress' => $request->walletAddress,
+                'name' => $request->name,
+                'nid' => $request->nid,
+                'lic' => $request->lic,
+                'issue' => strtotime($request->issue),
+                'exp' => strtotime($request->exp)
+            ], 200);
+        }
+        else if($regType == 'judge'){
+
+            $judge = new judge();
+            $judge->WALLET_ADDRESS = $request->walletAddress;
+            $judge->NAME = $request->name;
+            $judge->save();
+
+            return response()->json([
+                'walletAddress' => $request->walletAddress,
+                'name' => $request->name,
+            ], 200);
+        }
+        else if($regType == 'police'){
+
+
+            // $police = new police();
+            // $police->WALLET_ADDRESS = $request->walletAddress;
+            // $police->NAME = $request->name;
+            // $police->save();
         }
 
-        session()->flash('newAccount', true);
 
-        return response()->json([
-            'walletAddress' => $request->walletAddress,
-            'name' => $request->name,
-            'nid' => $request->nid,
-            'lic' => $request->lic,
-            'issue' => strtotime($request->issue),
-            'exp' => strtotime($request->exp)
-        ], 200);
 
-        // return redirect('/login');
     }
 }

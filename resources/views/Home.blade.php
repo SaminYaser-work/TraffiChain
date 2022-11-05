@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'TraffiChain')
 
 {{-- @section('header')
     Home 🏠
@@ -21,11 +21,14 @@
             </h2>
             <h2
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600">Blockchain</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600">Smart
+                    Contracts</span>
             </h2>
-            <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, libero!
+            <p
+                class="flex justify-center items-center flex-col gap-2 mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+                Eliminate the need of trust by harnessing the power of
+                <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-400">
+                    Blockchain</span>
             </p>
             <a href="{{ url('register') }}"
                 class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">

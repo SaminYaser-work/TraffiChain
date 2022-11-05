@@ -21,7 +21,7 @@ class LoginController extends Controller
 
     function login()
     {
-        return view('login.sel');
+        return view('login.login');
 
 
     }
@@ -47,7 +47,7 @@ class LoginController extends Controller
             return redirect('/profile');
         } else {
             session()->flash('showError', true);
-            return view('login.sel');
+            return view('login.login');
         }
     }
 

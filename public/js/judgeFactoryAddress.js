@@ -34,14 +34,14 @@
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-/*!**********************************************!*\
-  !*** ./resources/js/ticketFactoryAddress.js ***!
-  \**********************************************/
+/*!*********************************************!*\
+  !*** ./resources/js/judgeFactoryAddress.js ***!
+  \*********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "deployedTicketFactoryContractAddress": () => (/* binding */ deployedTicketFactoryContractAddress)
+/* harmony export */   "deployedJudgeFactoryContractAddress": () => (/* binding */ deployedJudgeFactoryContractAddress)
 /* harmony export */ });
-var deployedTicketFactoryContractAddress = "0x9d0f84C6812e58AB2d8c152Df12a6d04553D2FBD";
+var deployedJudgeFactoryContractAddress = "0xD5195e052a437e9a4757ba9d9c71dCbb81e29A3b";
 
 /******/ })()
 ;

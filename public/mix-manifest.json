@@ -6,5 +6,6 @@
     "/js/driverFactoryAddress.js": "/js/driverFactoryAddress.js",
     "/js/ticketFactoryAddress.js": "/js/ticketFactoryAddress.js",
     "/js/InfractionsAddress.js": "/js/InfractionsAddress.js",
+    "/js/judgeFactoryAddress.js": "/js/judgeFactoryAddress.js",
     "/css/app.css": "/css/app.css"
 }

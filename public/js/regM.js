@@ -27206,40 +27206,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var ethers = __webpack_require__(/*! ethers */ "./node_modules/ethers/lib.esm/index.js");
 
 var regMMBtn = document.getElementById("regMMBtn");
-var regMMInput = document.getElementById("regMMInput");
-window.signer = null;
+var regMMInput = document.getElementById("walletAddress");
+signer = null;
 regMMBtn.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
   var provider, address;
   return _regeneratorRuntime().wrap(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          console.log("clicked");
-
           if (!(signer == null)) {
             _context.next = 18;
             break;
           }
 
           provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-          _context.prev = 3;
-          _context.next = 6;
+          _context.prev = 2;
+          _context.next = 5;
           return provider.send("eth_requestAccounts", []);
 
-        case 6:
+        case 5:
           signer = provider.getSigner();
-          _context.next = 9;
+          _context.next = 8;
           return signer.getAddress();
 
-        case 9:
+        case 8:
           address = _context.sent;
           regMMInput.value = address;
           _context.next = 16;
           break;
 
-        case 13:
-          _context.prev = 13;
-          _context.t0 = _context["catch"](3);
+        case 12:
+          _context.prev = 12;
+          _context.t0 = _context["catch"](2);
+          console.error(_context.t0);
           alert("Failed to connect to wallet");
 
         case 16:
@@ -27254,7 +27253,7 @@ regMMBtn.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/
           return _context.stop();
       }
     }
-  }, _callee, null, [[3, 13]]);
+  }, _callee, null, [[2, 12]]);
 })));
 })();
 

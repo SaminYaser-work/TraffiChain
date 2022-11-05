@@ -110,5 +110,10 @@ class tcSeed extends Seeder
             ],
         );
 
+        DB::table('judge')->insert([
+            'WALLET_ADDRESS' => '0x7296f61f990CbA99c3aeFbC5F38208F857830256',
+            'NAME' => 'Abu Hanifa',
+        ]);
+
     }
 }

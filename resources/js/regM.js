@@ -1,13 +1,11 @@
 const ethers = require("ethers");
 
 const regMMBtn = document.getElementById("regMMBtn");
-const regMMInput = document.getElementById("regMMInput");
+const regMMInput = document.getElementById("walletAddress");
 
-window.signer = null;
+signer = null;
 
 regMMBtn.addEventListener("click", async function () {
-    console.log("clicked");
-
     if (signer == null) {
         const provider = new ethers.providers.Web3Provider(
             window.ethereum,
@@ -19,7 +17,8 @@ regMMBtn.addEventListener("click", async function () {
             signer = provider.getSigner();
             const address = await signer.getAddress();
             regMMInput.value = address;
-        } catch {
+        } catch (e) {
+            console.error(e);
             alert("Failed to connect to wallet");
         }
     } else {

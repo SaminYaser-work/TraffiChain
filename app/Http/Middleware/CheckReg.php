@@ -20,7 +20,7 @@ class CheckReg
         $regType = session()->get('regType');
 
         if (!$regType) {
-            return dd(session()->all());
+            return print_r(session()->all());
         }
 
         if ($regType == 'driver'){
@@ -36,13 +36,21 @@ class CheckReg
 
             );
 
-            // if ($validator->fails()) {
-            //     return response()->json($validator->messages(), Response::HTTP_BAD_REQUEST);
-            // }
+            return $next($request);
+        }
+        else if ($regType == 'judge') {
+            $request->validate(
+                [
+                    'name' => 'required|min:3|string',
+                    'walletAddress' => 'required|string|unique:App\Models\judge,WALLET_ADDRESS',
+                ]
+            );
 
             return $next($request);
         }
+        else{
+            return redirect('home');
+        }
 
-        return redirect('home');
     }
 }

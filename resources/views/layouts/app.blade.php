@@ -30,7 +30,7 @@
 
 
 
-    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-transparent">
 
         <div class="container flex flex-wrap justify-between items-center mx-auto">
 
@@ -62,7 +62,7 @@
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
 
                 <ul
-                    class="flex flex-col items-center justify-center p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="flex flex-col items-center gap-1 justify-center p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-transparent md:dark:bg-transparent dark:border-gray-700">
 
                     <li>
 
@@ -72,7 +72,7 @@
 
                     </li>
 
-                    <li>
+                    {{-- <li>
 
                         <a href="#"
                             class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
@@ -84,7 +84,7 @@
                         <a href="#"
                             class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
 
-                    </li>
+                    </li> --}}
 
                     <li>
 
@@ -116,7 +116,7 @@
 
     <div class="flex justify-center items-center flex-col my-10">
 
-        <h1 class="text-3xl">@yield('header')</h1>
+        <h1 class="text-4xl font-extrabold dark:text-white mb-5">@yield('header')</h1>
 
         <main class="my-5 h-screen">
 
@@ -129,23 +129,24 @@
 
     <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
         <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
+            <a href="{{ url('/home') }}" class="flex items-center mb-4 sm:mb-0">
                 <img src="{{ url('/images/logo.png') }}" class="mr-3 h-8" alt="TraffiChain Logo">
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">TraffiChain</span>
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li>
-                    <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                    <a href="{{ url('/home') }}" class="mr-4 hover:underline md:mr-6 ">Home</a>
                 </li>
                 <li>
-                    <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                    <a href="{{ url('/register') }}" class="mr-4 hover:underline md:mr-6 ">Register</a>
                 </li>
                 <li>
-                    <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                    <a href="{{ url('/login') }}" class="mr-4 hover:underline md:mr-6 ">Login</a>
                 </li>
                 <li>
+                    {{-- <li>
                     <a href="#" class="hover:underline">Contact</a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
