@@ -1,1 +1,1 @@
-const deployedTicketFactoryContractAddress = "0xB11F8fd47AeCE2d57B908F3EdBa8556dA12787F2"; export { deployedTicketFactoryContractAddress};
+const deployedTicketFactoryContractAddress = "0x6F7E66d142CF32b89ADBCFcD1926F8b59fF100c2"; export { deployedTicketFactoryContractAddress};

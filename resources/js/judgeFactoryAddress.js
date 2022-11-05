@@ -1,0 +1,1 @@
+const deployedJudgeFactoryContractAddress = "0x9499be99CF682207ea3bbb917641EbD832e2f7C9"; export { deployedJudgeFactoryContractAddress};

@@ -19,7 +19,7 @@
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white" id='modalHeader'>
                         Pay Ticket
                     </h3>
                     <button type="button"
@@ -36,7 +36,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
-                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="modalBodyText">
                         Pay the fine of <span id="fineAmount"></span> BDT to resolve the ticket (Case Slip ID: <span
                             id="caseSlipId"></span> )?
                     </p>
@@ -104,17 +104,17 @@
                         const closeModals = document.querySelectorAll("[id='closeModal']");;
                         const modal = document.getElementById('modal');
                         const payTicketBtn = document.getElementById('payTicketBtn');
-                        const fineAmount = document.getElementById('fineAmount');
-                        const caseSlipId = document.getElementById('caseSlipId');
+                        const modalHeader = document.getElementById('modalHeader');
+                        const modalBodyText = document.getElementById('modalBodyText');
+
+                        modalHeader.innerHTML = 'Pay Ticket';
+                        modalBodyText.textContent = `Pay the fine of ${fine} BDT to resolve the ticket (Case Slip ID: ${address} )?`;
 
                         for (let index = 0; index < closeModals.length; index++) {
                             closeModals[index].onclick = (e) => {
                                 modal.classList.add('hidden');
                             }
                         }
-
-                        fineAmount.textContent = fine;
-                        caseSlipId.textContent = address;
 
                         modal.classList.toggle('hidden');
 
@@ -130,13 +130,58 @@
                         });
 
                     };
+
+                    function contestTicket(address) {
+
+                        const closeModals = document.querySelectorAll("[id='closeModal']");;
+                        const modal = document.getElementById('modal');
+                        const payTicketBtn = document.getElementById('payTicketBtn');
+                        const modalHeader = document.getElementById('modalHeader');
+                        const modalBodyText = document.getElementById('modalBodyText');
+
+                        modalHeader.textContent = 'Request for a Trial';
+                        modalBodyText.textContent = 'Do you want to contest the ticket at the court for ticket ' + address + '?';
+
+                        for (let index = 0; index < closeModals.length; index++) {
+                            closeModals[index].onclick = (e) => {
+                                modal.classList.add('hidden');
+                            }
+                        }
+
+                        modal.classList.toggle('hidden');
+
+                        payTicketBtn.addEventListener('click', async () => {
+                            payTicketBtn.textContent = 'Please Wait...';
+                            const ticketContract = window.TicketContractInstance(address,
+                                '<?php echo $userInfo->WALLET_ADDRESS; ?>');
+
+                            const judgeAddress = await window.judgeContractFactory.getNextJudge();
+
+                            const res = await window.judgeContractFactory.assignJudgeToTicket(
+                                address,
+                                judgeAddress
+                            );
+
+                            try {
+                                await ticketContract.requestHearing(judgeAddress);
+                            } catch (e) {
+                                console.log('Error while requesting hearing... Removing judge');
+                                await window.judgeContractFactory
+                                    .removeJudgeFromTicket(judgeAddress,
+                                        address);
+                                alert('Something went wrong. Please try again later.');
+                            }
+                            location.reload();
+                        });
+
+                    }
+
                     (async () => {
                         const tbody = document.querySelector('tbody');
 
                         const tickets = await window.ticketContractFactory.getAllTickets(
                             '<?php echo $userInfo->WALLET_ADDRESS; ?>'
                         );
-                        console.log('tickets: ', tickets);
 
                         tickets.forEach(async (address) => {
                             const ticketContract = window.TicketContractInstance(address);
@@ -147,15 +192,15 @@
                             let judgeWalletAddress = 'Not Assigned';
                             try {
                                 judgeWalletAddress = await ticketContract.getJudgeAddress();
-                                judgeWalletAddress = judgeWalletAddress.slice(0, 5) + '***' + judgeWalletAddress
+                                judgeWalletAddress = judgeWalletAddress.slice(0, 5) + '***' +
+                                    judgeWalletAddress
                                     .slice(-5);
                             } catch (err) {
-                                console.log('No judge assigned yet');
+                                // console.log('No judge assigned yet');
                             }
 
 
                             const charges = await ticketContract.getCharges();
-                            console.log('charges: ', charges);
 
                             // const res = await window.infractionContract.getInfractionFine(140);
                             // console.log(res.toString());
@@ -198,33 +243,46 @@
                                 tr.appendChild(td);
                             }
 
+
+                            styleClasses = [
+                                'font-medium', 'text-blue-600', 'dark:text-blue-500', 'enabled:hover:underline',
+                                'disabled:text-slate-400', 'disabled:dark:text-slate-400',
+                                'disabled:cursor-not-allowed'
+                            ];
+                            // Pay Ticket Button
                             let td = document.createElement('td');
                             td.classList.add('py-3', 'px-6');
-                            let a = document.createElement('button');
-                            a.addEventListener('click', () => {
-                                show_modal(address, fineAmount, ticketContract);
-                            });
-                            a.classList.add(
-                                'font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
-                            // a.setAttribute('href', '/profile/ticket/pay/' + address);
-                            // a.setAttribute('href', '#');
-                            a.setAttribute('data-modal-toggle', 'payModal');
-                            a.setAttribute('type', 'button');
-                            a.appendChild(document.createTextNode('Pay'));
-                            td.appendChild(a);
+                            let payButton = document.createElement('button');
+                            if (status == 'Pending' || status == 'Late') {
+                                payButton.addEventListener('click', () => {
+                                    show_modal(address, fineAmount, ticketContract);
+                                });
+                            } else {
+                                payButton.setAttribute('disabled', 'true');
+                            }
+                            payButton.classList.add(...styleClasses);
+                            payButton.setAttribute('type', 'button');
+                            payButton.appendChild(document.createTextNode('Pay'));
+                            td.appendChild(payButton);
                             tr.appendChild(td);
 
 
+                            // Contest button
                             td = document.createElement('td');
                             td.classList.add('py-3', 'px-6');
-                            a = document.createElement('button');
-                            a.classList.add(
-                                'font-medium', 'text-blue-600', 'dark:text-blue-500', 'hover:underline');
-                            // a.setAttribute('href', '/profile/ticket/contest/' + address);
-                            // a.setAttribute('href', '#');
-                            a.appendChild(document.createTextNode(
+                            const contestButton = document.createElement('button');
+
+                            if (status == 'Pending' || status == 'Late') {
+                                contestButton.addEventListener('click', () => contestTicket(address));
+                            } else {
+                                contestButton.setAttribute('disabled', 'true');
+                            }
+
+                            contestButton.setAttribute('type', 'button');
+                            contestButton.classList.add(...styleClasses);
+                            contestButton.appendChild(document.createTextNode(
                                 'Contest'));
-                            td.appendChild(a);
+                            td.appendChild(contestButton);
                             tr.appendChild(td);
 
 

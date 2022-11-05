@@ -24,7 +24,8 @@ mix.js("resources/js/app.js", "public/js")
         "resources/js/ticketFactoryAddress.js",
         "public/js/ticketFactoryAddress.js"
     )
+    .js("resources/js/InfractionsAddress.js", "public/js/InfractionsAddress.js")
     .js(
-        "resources/js/InfractionsAddress.js",
-        "public/js/InfractionsAddress.js"
+        "resources/js/judgeFactoryAddress.js",
+        "public/js/judgeFactoryAddress.js"
     );
