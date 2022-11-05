@@ -26,6 +26,7 @@ Then, run the following commands to generate the application key and migrate the
 
 ```bash
 php artisan key:generate
+php artisan migrate:fresh --seed --seeder=tcSeed
 ```
 
 Then finally run the following command to start the server:
@@ -37,7 +38,7 @@ php artisan serve
 And the following command for tailwind to work:
 
 ```bash
-npm watch
+npm run watch
 ```
 
 Visit `http://localhost:8000` to see the website.
