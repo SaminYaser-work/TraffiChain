@@ -41,7 +41,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "deployedInfractionsContractAddress": () => (/* binding */ deployedInfractionsContractAddress)
 /* harmony export */ });
-var deployedInfractionsContractAddress = "0x1C2f3c155b0CBA52eE6424fcB26bDE284CD822Ae";
+var deployedInfractionsContractAddress = "0x398959764D69A3D5073CB4467cF0A3b69e3F220b";
 
 /******/ })()
 ;

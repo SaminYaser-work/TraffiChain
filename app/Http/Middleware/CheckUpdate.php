@@ -17,16 +17,44 @@ class CheckUpdate
     public function handle(Request $request, Closure $next)
     {
 
-        $request->validate(
-            [
-                'name' => 'required|min:3|string',
-                'nid' => 'required|int|digits:10',
-                'lic' => 'required|int|digits:15',
-                'issue' => 'required|date',
-                'exp' => 'required|date|after:issue',
-                'walletAddress' => 'required|string',
-            ]
-        );
+        $accType = session()->get('accType');
+
+        if($accType == 'driver') {
+            $request->validate(
+                [
+                    'name' => 'required|min:3|string',
+                    'nid' => 'required|int|digits:10',
+                    'lic' => 'required|int|digits:15',
+                    'issue' => 'required|date',
+                    'exp' => 'required|date|after:issue',
+                    'walletAddress' => 'required|string',
+                ]
+            );
+
+        }
+        else if($accType == 'judge')
+        {
+            $request->validate(
+                [
+                    'name' => 'required|min:3|string',
+                ]
+            );
+        }
+        else if($accType == 'police')
+        {
+            $request->validate(
+                [
+                    'name' => 'required|min:3|string',
+                    'nid' => 'required|int|digits:10',
+                    'rank' => 'required|string',
+                    'walletAddress' => 'required|string',
+                ]
+            );
+        }
+        else{
+            dd(session()->all());
+        }
+
         return $next($request);
     }
 }

@@ -24,6 +24,7 @@ contract Ticket is AccessControl {
     // disputing: Ticket is being disputed in the court by the request of the driver
     // dismissed: Ticket is dismissed by the court
     // unresolvable: ???
+    // Convicted: Ticket is convicted by the court
     enum Status {
         pending,
         late,
@@ -31,7 +32,8 @@ contract Ticket is AccessControl {
         cancelled,
         disputing,
         dismissed,
-        unresolvable
+        unresolvable,
+        convicted
     }
 
     // Roles
@@ -101,6 +103,7 @@ contract Ticket is AccessControl {
         if (status == Status.paid) return "Paid";
         if (status == Status.cancelled) return "Cancelled";
         if (status == Status.unresolvable) return "Unresolvalble";
+        if (status == Status.convicted) return "Convicted";
         return "Error";
     }
 

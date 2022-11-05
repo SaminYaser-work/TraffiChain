@@ -22,24 +22,40 @@ class ProfileController extends Controller
     function showProfile()
     {
         $userInfo = $this->autheticate();
+        $accType = session()->get('accType');
 
-        if ($userInfo) {
-            $vehicleInfo = DB::table('vehicle')
-                ->join('registered_vehicles', 'vehicle.REGISTRATION_NUMBER', '=', 'registered_vehicles.REGISTRATION_NUMBER')
-                ->where('registered_vehicles.OWNER_ID', $userInfo->id)
-                ->get();
+        if($accType == 'driver') {
+            if ($userInfo) {
+                $vehicleInfo = DB::table('vehicle')
+                    ->join('registered_vehicles', 'vehicle.REGISTRATION_NUMBER', '=', 'registered_vehicles.REGISTRATION_NUMBER')
+                    ->where('registered_vehicles.OWNER_ID', $userInfo->id)
+                    ->get();
 
-            $ticketInfo = DB::table('tickets')
-                ->where('DRIVER_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
-                ->get();
+                $ticketInfo = DB::table('tickets')
+                    ->where('DRIVER_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
+                    ->get();
 
-            return view('profile.driver.PDriver')
-                ->with('userInfo', $userInfo)
-                ->with('vehicleInfo', $vehicleInfo)
-                ->with('ticketInfo', $ticketInfo);
-        } else {
-            // TODO: flash message at login page (You need to login first)
-            return redirect('login');
+                return view('profile.driver.PDriver')
+                    ->with('userInfo', $userInfo)
+                    ->with('vehicleInfo', $vehicleInfo)
+                    ->with('ticketInfo', $ticketInfo);
+            } else {
+                // TODO: flash message at login page (You need to login first)
+                return redirect('login');
+            }
+        }
+        else if ($accType == 'judge') {
+            if ($userInfo) {
+                // $ticketInfo = DB::table('tickets')
+                //     ->where('JUDGE_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
+                //     ->get();
+
+                return view('profile.judge.PJudge')
+                    ->with('userInfo', $userInfo);
+            } else {
+                // TODO: flash message at login page (You need to login first)
+                return redirect('login');
+            }
         }
     }
 
@@ -99,11 +115,11 @@ class ProfileController extends Controller
                     ->with('userInfo', $userInfo);
             }
             elseif($accType == 'police') {
-                return view('profile.agent.updatePolice')
+                return view('profile.police.updatePolice')
                     ->with('userInfo', $userInfo);
             }
             elseif($accType == 'judge') {
-                return view('profile.agent.updateJudge')
+                return view('profile.judge.updateJudge')
                     ->with('userInfo', $userInfo);
             }
             else {
@@ -129,7 +145,6 @@ class ProfileController extends Controller
                     'LICENSE_NUMBER' => $request->lic,
                     'LICENSE_ISSUE_DATE' => $request->issue,
                     'LICENSE_EXPIRY_DATE' => $request->exp,
-                    'WALLET_ADDRESS' => $request->walletAddress,
                 ]);
 
             $userInfo = DB::table('driver')
@@ -138,11 +153,44 @@ class ProfileController extends Controller
 
             session()->put('userInfo', $userInfo);
 
-            // TODO: Flash info change alert
-            session()->flash('infoChangeSuccess', true);
-            return redirect('profile/update');
+        }
+        else if ($accType == 'police')
+        {
+            $info = DB::table('police')
+                ->where('id', session()->get('userInfo')->id)
+                ->update([
+                    'NAME' => $request->name,
+                    'NID' => $request->nid,
+                    'RANK' => $request->rank,
+                ]);
+
+            $userInfo = DB::table('police')
+                ->where('id', session()->get('userInfo')->id)
+                ->first();
+
+            session()->put('userInfo', $userInfo);
+        }
+        else if($accType == 'judge')
+        {
+            $info = DB::table('judge')
+                ->where('id', session()->get('userInfo')->id)
+                ->update([
+                    'NAME' => $request->name,
+                ]);
+
+            $userInfo = DB::table('judge')
+                ->where('id', session()->get('userInfo')->id)
+                ->first();
+
+            session()->put('userInfo', $userInfo);
+        }
+        else{
+            dd('error');
         }
 
+        // TODO: Flash info change alert
+        session()->flash('infoChangeSuccess', true);
+        return redirect('profile/update');
     }
 
     function showTickets()
