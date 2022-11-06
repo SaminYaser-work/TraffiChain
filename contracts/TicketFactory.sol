@@ -9,6 +9,7 @@ contract TicketFactory {
 
     mapping(address => address[]) private driverToTickets;
     mapping(address => address[]) private officerToTickets;
+    address lastAddedTicket;
 
     function createNewTicket(
         address driver,
@@ -23,6 +24,8 @@ contract TicketFactory {
 
         driverToTickets[driver].push(address(ticket));
         officerToTickets[msg.sender].push(address(ticket));
+
+        lastAddedTicket = address(ticket);
     }
 
     // Rip gas
@@ -57,6 +60,10 @@ contract TicketFactory {
 
     function getOfficerTickets(address officer) external view returns(address[] memory) {
         return officerToTickets[officer];
+    }
+
+    function getLastAddedTicket() external view returns(address) {
+        return lastAddedTicket;
     }
 
     function getActiveTickets(address driver) external view returns(address[] memory) {

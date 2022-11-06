@@ -54,7 +54,7 @@ class tcSeed extends Seeder
             'WALLET_ADDRESS' => $wallet,
             'NAME' => 'Samin',
             'NID' => '1111111111',
-            'LICENSE_NUMBER' => '1111111111111111',
+            'LICENSE_NUMBER' => '111111111111111',
             'LICENSE_ISSUE_DATE' => '2021-10-29',
             'LICENSE_EXPIRY_DATE' => '2022-10-29',
             'SCORE' => '50',
@@ -113,6 +113,15 @@ class tcSeed extends Seeder
         DB::table('judge')->insert([
             'WALLET_ADDRESS' => '0x7296f61f990CbA99c3aeFbC5F38208F857830256',
             'NAME' => 'Abu Hanifa',
+        ]);
+
+        DB::table('police')->insert([
+            'WALLET_ADDRESS' => "0x81a741D43F8A8A0576dcAf254E271C09841D9bbA",
+            'NAME' => "RoboCop",
+            'STATION' => "Detroit Police Department",
+            'RANK' => "Detective",
+            'BADGE_NUMBER' => "59524",
+            'SCORE' => 100,
         ]);
 
     }

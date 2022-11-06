@@ -3,64 +3,82 @@ pragma solidity 0.8.17;
 
 contract VehicleFactory {
 
-    enum VehicleStatus {
+    enum Status {
         normal,
         impounded,
-        decommissioned
+        decommissioned,
+        registration_pending
     }
 
-    enum VehicleClass {
+    enum Class {
         sedan,
         suv,
-        microbus,
-        minibus,
-        bus
+        bus,
+        truck,
+        motorbike,
+        cng
     }
 
-    enum VehicleType {
-        civilian,
+    enum Type {
         government,
+        civilian,
         special
     }
 
     struct Vehicle {
         string name;
-        string chassisNo;
-        uint16 vehicleStatus;
-        uint16 vehicleClass;
-        uint16 vehicleType;
+        uint256 chassisNo;
+        Status vehicleStatus;
+        Class vehicleClass;
+        Type vehicleType;
+        uint256 licenseNo;
+        address owner;
     }
 
-    Vehicle[] private vehicles;
+    mapping(address => Vehicle[]) private ownerToVehicles;
+    mapping(uint256 => Vehicle) private licenseToVehicle;
 
-    mapping(address => Vehicle) private ownerToVehicle;
-
-
-    function registerVehicle
-    (
-        string calldata _name,
-        string calldata _chassisNo,
-        uint16 _vehicleStatus,
-        uint16 _vehicleClass,
-        uint16 _vehicleType
+    function createNewVehicle(
+        string memory name_,
+        uint256 chassisNo_,
+        Class class_,
+        Type type_,
+        uint256 licenseNo_
     ) external
     {
-        Vehicle memory vehicle = Vehicle(
-            _name,
-            _chassisNo,
-            _vehicleStatus,
-            _vehicleClass,
-            _vehicleType
-        );
+        ownerToVehicles[msg.sender].push(Vehicle({
+            name: name_,
+            chassisNo: chassisNo_,
+            vehicleStatus: Status.registration_pending,
+            vehicleClass: class_,
+            vehicleType: type_,
+            licenseNo: licenseNo_,
+            owner: msg.sender
+        }));
 
-        vehicles.push(vehicle);
+        licenseToVehicle[licenseNo_] = Vehicle({
+            name: name_,
+            chassisNo: chassisNo_,
+            vehicleStatus: Status.registration_pending,
+            vehicleClass: class_,
+            vehicleType: type_,
+            licenseNo: licenseNo_,
+            owner: msg.sender
+        });
+
     }
 
-    function assignOwner(address owner, uint256 VehicleID) external {
-        ownerToVehicle[owner] = vehicles[VehicleID];
+    function changeStatus(
+        uint256 licenseNo,
+        Status status
+    ) external
+    {
+        licenseToVehicle[licenseNo].vehicleStatus = status;
     }
 
-    function getOwnedVehicles(address owner) external {
-
+    function getVehicleByLicense(
+        uint256 licenseNo
+    ) external view returns(Vehicle memory) {
+        return licenseToVehicle[licenseNo];
     }
 }

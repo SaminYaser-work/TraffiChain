@@ -61,4 +61,22 @@ contract Driver {
     function getScore() external view returns(uint16) {
         return score;
     }
+
+    function getAllInfo() external view returns(
+        string memory,
+        uint256,
+        uint256,
+        uint256,
+        uint256,
+        uint16
+    ) {
+        return (
+            name,
+            i_NID,
+            i_licenseNo,
+            i_lic_issue_date,
+            lic_exp_date,
+            score
+        );
+    }
 }

@@ -12,7 +12,8 @@
     <section class="flex justify-center gap-5 flex-wrap mx-10">
 
         {{-- Info --}}
-        <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div
+            class="p-6 h-fit max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             <div class="flex justify-start align-middle py-2">
                 <svg aria-hidden="true" class="flex-shrink-0 inline w-8 h-8 mr-3 self-baseline" fill="currentColor"
@@ -58,7 +59,7 @@
         </div>
 
         {{-- Tickets --}}
-        <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-6 h-fit bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             <div class="flex justify-start items-baseline gap-2 py-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -71,19 +72,14 @@
             </div>
 
 
-
-
             <div class="flex justify-center items-center flex-col" id="noTickets">
                 <p>You currently have</p>
                 <div class="grid place-items-center mb-5">
                     <p class="text-6xl lg:text-8xl" id="ticketCounter">
                     </p>
                 </div>
-                <p class="">issued tickets.</p>
-                <p class="text-green-600 hidden" id="goodText">Keep up the good work.</p>
+                <p class="">Active Cases.</p>
             </div>
-
-
 
 
             <a href="{{ url('profile/tickets') }}" class="mt-3 inline-flex items-center text-blue-600 hover:underline">
@@ -104,32 +100,25 @@
                     const tickets = await window.judgeContractFactory.getActiveTickets(
                         judge
                     );
-                    console.log(judge);
-                    console.log('tickets: ', tickets);
 
-                    // const numOfTickets = tickets.length;
-                    // const ticketCounter = document.getElementById('ticketCounter');
-                    // const noTickets = document.getElementById('noTickets');
-                    // const linkText = document.getElementById('linkText');
-                    // const goodText = document.getElementById('goodText');
+                    console.log(tickets);
 
-                    // ticketCounter.textContent = numOfTickets;
+                    const numOfTickets = tickets.length;
+                    const ticketCounter = document.getElementById('ticketCounter');
+                    const noTickets = document.getElementById('noTickets');
+                    const linkText = document.getElementById('linkText');
 
-                    // if (numOfTickets == 0) {
-                    //     // ticketCounter.classList.remove('text-red-600');
-                    //     // ticketCounter.classList.add('text-green-600');
-                    //     noTickets.classList.add('text-green-600');
-                    //     noTickets.classList.remove('text-red-600');
-                    //     linkText.textContent = 'See History';
-                    //     goodText.classList.remove('hidden');
-                    // } else {
-                    //     noTickets.classList.add('text-red-600');
-                    //     noTickets.classList.remove('text-green-600');
-                    //     // ticketCounter.classList.remove('text-green-600');
-                    //     // ticketCounter.classList.add('text-red-600');
-                    //     linkText.textContent = 'Resolve Tickets';
-                    //     // goodText.classList.add('hidden');
-                    // }
+                    ticketCounter.textContent = numOfTickets;
+
+                    if (numOfTickets == 0) {
+                        noTickets.classList.add('text-green-600');
+                        noTickets.classList.remove('text-red-600');
+                        linkText.textContent = 'See Past Cases';
+                    } else {
+                        noTickets.classList.add('text-red-600');
+                        noTickets.classList.remove('text-green-600');
+                        linkText.textContent = 'Give Verdict';
+                    }
                 })();
             </script>
 

@@ -27,10 +27,10 @@ class CheckUpdate
                     'lic' => 'required|int|digits:15',
                     'issue' => 'required|date',
                     'exp' => 'required|date|after:issue',
-                    'walletAddress' => 'required|string',
                 ]
             );
 
+            return $next($request);
         }
         else if($accType == 'judge')
         {
@@ -47,7 +47,6 @@ class CheckUpdate
                     'name' => 'required|min:3|string',
                     'nid' => 'required|int|digits:10',
                     'rank' => 'required|string',
-                    'walletAddress' => 'required|string',
                 ]
             );
         }

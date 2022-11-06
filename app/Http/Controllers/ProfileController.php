@@ -57,6 +57,27 @@ class ProfileController extends Controller
                 return redirect('login');
             }
         }
+        else if($accType == 'police') {
+            if ($userInfo) {
+                return view('profile.police.PPolice')
+                    ->with('userInfo', $userInfo);
+            } else {
+                // TODO: flash message at login page (You need to login first)
+                return redirect('login');
+            }
+        }
+    }
+
+    function issueTicket() {
+        $userInfo = $this->autheticate();
+
+        if($userInfo) {
+            return view('profile.police.issueTicket')
+                ->with('userInfo', $userInfo);
+        } else {
+            // TODO: flash message at login page (You need to login first)
+            return redirect('login');
+        }
     }
 
 
@@ -147,11 +168,6 @@ class ProfileController extends Controller
                     'LICENSE_EXPIRY_DATE' => $request->exp,
                 ]);
 
-            $userInfo = DB::table('driver')
-                ->where('id', session()->get('userInfo')->id)
-                ->first();
-
-            session()->put('userInfo', $userInfo);
 
         }
         else if ($accType == 'police')
@@ -164,11 +180,7 @@ class ProfileController extends Controller
                     'RANK' => $request->rank,
                 ]);
 
-            $userInfo = DB::table('police')
-                ->where('id', session()->get('userInfo')->id)
-                ->first();
 
-            session()->put('userInfo', $userInfo);
         }
         else if($accType == 'judge')
         {
@@ -178,17 +190,18 @@ class ProfileController extends Controller
                     'NAME' => $request->name,
                 ]);
 
-            $userInfo = DB::table('judge')
-                ->where('id', session()->get('userInfo')->id)
-                ->first();
 
-            session()->put('userInfo', $userInfo);
         }
         else{
             dd('error');
         }
 
-        // TODO: Flash info change alert
+        $userInfo = DB::table($accType)
+            ->where('id', session()->get('userInfo')->id)
+            ->first();
+
+        session()->put('userInfo', $userInfo);
+
         session()->flash('infoChangeSuccess', true);
         return redirect('profile/update');
     }
@@ -196,45 +209,51 @@ class ProfileController extends Controller
     function showTickets()
     {
         $userInfo = $this->autheticate();
+        $accType = session()->get('accType');
 
-        if ($userInfo) {
-            $ticketInfo = DB::table('tickets')
-                ->where('DRIVER_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
-                ->get();
-
-            // Calculating fine amount
-            foreach($ticketInfo as $ticket) {
-                // $ticket->ISSUE_DATE = date('d-m-Y', strtotime($ticket->ISSUE_DATE));
-                // $ticket->EXPIRY_DATE = date('d-m-Y', strtotime($ticket->EXPIRY_DATE));
-                $infractions = DB::table('infractions')
-                    ->where('CASE_SLIP_NUMBER', $ticket->CASE_SLIP_NUMBER)
+        if($accType == 'driver'){
+            if ($userInfo) {
+                $ticketInfo = DB::table('tickets')
+                    ->where('DRIVER_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
                     ->get();
 
-                $totalFine = 0;
-                foreach($infractions as $infraction) {
+                // Calculating fine amount
+                foreach($ticketInfo as $ticket) {
+                    // $ticket->ISSUE_DATE = date('d-m-Y', strtotime($ticket->ISSUE_DATE));
+                    // $ticket->EXPIRY_DATE = date('d-m-Y', strtotime($ticket->EXPIRY_DATE));
+                    $infractions = DB::table('infractions')
+                        ->where('CASE_SLIP_NUMBER', $ticket->CASE_SLIP_NUMBER)
+                        ->get();
 
-                    $fine = DB::table('fines')
-                        ->where('INFRACTION_ID', $infraction->INFRACTION_ID)
-                        ->first()->FINE_AMOUNT;
+                    $totalFine = 0;
+                    foreach($infractions as $infraction) {
 
-                    if($fine) {
-                        $totalFine += $fine;
+                        $fine = DB::table('fines')
+                            ->where('INFRACTION_ID', $infraction->INFRACTION_ID)
+                            ->first()->FINE_AMOUNT;
+
+                        if($fine) {
+                            $totalFine += $fine;
+                        }
+                        else {
+                            $totalFine += 0;
+                        }
                     }
-                    else {
-                        $totalFine += 0;
-                    }
+                    $ticket->FINE_AMOUNT = $totalFine;
+
                 }
-                $ticket->FINE_AMOUNT = $totalFine;
 
+                return view('profile.driver.citedTickets')
+                    ->with('userInfo', $userInfo)
+                    ->with('ticketInfo', $ticketInfo);
+            } else {
+                return redirect('login');
             }
-
-
-            return view('profile.driver.citedTickets')
-                ->with('userInfo', $userInfo)
-                ->with('ticketInfo', $ticketInfo)
-                ->with('infractions', $infractions);
-        } else {
-            return redirect('login');
+        }
+        else if ($accType == 'judge')
+        {
+            return view('profile.judge.disputingTickets')
+                ->with('userInfo', $userInfo);
         }
     }
 }

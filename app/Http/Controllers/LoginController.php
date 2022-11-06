@@ -35,7 +35,6 @@ class LoginController extends Controller
     function doLogin(Request $request)
     {
 
-        // $request->session()->flush();
         $accType = $request->accType;
         $data = DB::table($accType)->where('WALLET_ADDRESS', $request->walletAddress)->first();
 
@@ -43,6 +42,8 @@ class LoginController extends Controller
 
             $request->session()->put('accType', $accType);
             $request->session()->put('userInfo', $data);
+
+            $request->cookies->set('accType', $accType);
 
             return redirect('/profile');
         } else {
@@ -56,6 +57,7 @@ class LoginController extends Controller
         session()->forget('accType');
         session()->forget('vehicleInfo');
         session()->put('_previous', url('login'));
+        cookie()->queue(cookie()->forget('accType'));
         return redirect('login');
     }
 

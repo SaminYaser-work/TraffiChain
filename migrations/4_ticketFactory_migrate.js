@@ -9,6 +9,22 @@ var jsonFile2 = "../build/contracts/Ticket.json";
 var parsed2 = JSON.parse(fs.readFileSync(jsonFile2));
 abi2 = parsed2["abi"];
 
+var jsonFile3 = "../build/contracts/JudgeFactory.json";
+var parsed3 = JSON.parse(fs.readFileSync(jsonFile3));
+abi3 = parsed3["abi"];
+
+var jsonFile4 = "../build/contracts/PoliceFactory.json";
+var parsed4 = JSON.parse(fs.readFileSync(jsonFile4));
+abi4 = parsed4["abi"];
+
+const {
+    deployedJudgeFactoryContractAddress,
+} = require("../resources/js/judgeFactoryAddress.js");
+
+const {
+    deployedPoliceFactoryContractAddress,
+} = require("../resources/js/policeFactoryAddress.js");
+
 const ganacheRPCUrl = "http://127.0.0.1:7545";
 const systemProvider = new ethers.providers.JsonRpcProvider(ganacheRPCUrl);
 var signer = systemProvider.getSigner(2); // Police 1
@@ -26,6 +42,12 @@ module.exports = async function (deployer) {
         signer
     );
 
+    const policeFactoryContract = new ethers.Contract(
+        deployedPoliceFactoryContractAddress,
+        abi4,
+        signer
+    );
+
     const res = await ticketFactoryContract.createNewTicket(
         "0xF5B9af3C85a317Bc28522a3DDEBf4c73a16996b8",
         [137, 139]
@@ -36,7 +58,6 @@ module.exports = async function (deployer) {
         [140]
     );
 
-    // Request hearing
     const res3 = await ticketFactoryContract.createNewTicket(
         "0xF5B9af3C85a317Bc28522a3DDEBf4c73a16996b8",
         [137]
@@ -51,6 +72,12 @@ module.exports = async function (deployer) {
         "0xF5B9af3C85a317Bc28522a3DDEBf4c73a16996b8"
     );
 
+    // Assign tickets to police
+    for (let i = 0; i < tickets.length; i++) {
+        await policeFactoryContract.addTicket(tickets[i]);
+    }
+
+    // Request hearing
     const ticketContractInstance1 = new ethers.Contract(
         tickets[2],
         abi2,
@@ -63,7 +90,23 @@ module.exports = async function (deployer) {
         systemProvider.getSigner("0xF5B9af3C85a317Bc28522a3DDEBf4c73a16996b8")
     );
 
+    const judgeContractFactory = new ethers.Contract(
+        deployedJudgeFactoryContractAddress,
+        abi3,
+        signer
+    );
+
+    await judgeContractFactory.assignJudgeToTicket(
+        tickets[2],
+        "0x7296f61f990CbA99c3aeFbC5F38208F857830256"
+    );
+
     await ticketContractInstance1.requestHearing(
+        "0x7296f61f990CbA99c3aeFbC5F38208F857830256"
+    );
+
+    await judgeContractFactory.assignJudgeToTicket(
+        tickets[3],
         "0x7296f61f990CbA99c3aeFbC5F38208F857830256"
     );
 

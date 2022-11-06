@@ -28,4 +28,12 @@ mix.js("resources/js/app.js", "public/js")
     .js(
         "resources/js/judgeFactoryAddress.js",
         "public/js/judgeFactoryAddress.js"
+    )
+    .js(
+        "resources/js/policeFactoryAddress.js",
+        "public/js/policeFactoryAddress.js"
+    )
+    .js(
+        "resources/js/vehicleFactoryAddress.js",
+        "public/js/vehicleFactoryAddress.js"
     );

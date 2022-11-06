@@ -13,7 +13,8 @@
     <section class="flex justify-center gap-5 flex-wrap mx-10">
 
         {{-- Info --}}
-        <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div
+            class="p-6 h-fit max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             <div class="flex justify-start align-middle py-2">
                 <svg aria-hidden="true" class="flex-shrink-0 inline w-8 h-8 mr-3 self-baseline" fill="currentColor"
@@ -86,7 +87,7 @@
 
 
         {{-- Tickets --}}
-        <div class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="p-6 h-fit bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             <div class="flex justify-start items-end py-2">
                 <svg aria-hidden="true" class="flex-shrink-0 inline w-8 h-8 mr-3 self-start" fill="currentColor"
@@ -166,7 +167,7 @@
 
         {{-- Score --}}
         <div
-            class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            class="p-6 h-fit max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 
             <div class="flex justify-start align-middle py-2">
                 <svg aria-hidden="true" class="flex-shrink-0 inline w-8 h-8 mr-3 self-baseline" fill="currentColor"

@@ -77,15 +77,26 @@ contract JudgeFactory {
         return JudgeToTickets[judgeWallet];
     }
 
+    function getAllTickets(address judge) external view returns(address[] memory) {
+        return JudgeToTickets[judge];
+    }
+
     function getActiveTickets(address judgeWallet) external view returns(address[] memory) {
         address[] memory tickets = JudgeToTickets[judgeWallet];
-        address[] memory activeTickets = new address[](tickets.length);
+
         uint256 activeTicketsLength = 0;
 
         for (uint256 i = 0; i < tickets.length; i++) {
             if (Ticket(tickets[i]).isTicketActive()) {
-                activeTickets[activeTicketsLength] = tickets[i];
                 activeTicketsLength++;
+            }
+        }
+
+        address[] memory activeTickets = new address[](activeTicketsLength);
+
+        for (uint256 i = 0; i < tickets.length; i++) {
+            if (Ticket(tickets[i]).isTicketActive()) {
+                activeTickets[i] = tickets[i];
             }
         }
 

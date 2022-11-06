@@ -1,0 +1,1 @@
+const deployedVehicleFactoryContractAddress = "0x7914E4170dE63736cFAE693E384aEEaD44753331"; module.exports = { deployedVehicleFactoryContractAddress};

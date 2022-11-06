@@ -35,7 +35,7 @@ module.exports = async function (deployer) {
 
     // console.log(res, res2);
 
-    content = `const deployedJudgeFactoryContractAddress = "${instance.address}"; export { deployedJudgeFactoryContractAddress};`;
+    content = `const deployedJudgeFactoryContractAddress = "${instance.address}"; module.exports = { deployedJudgeFactoryContractAddress};`;
 
     console.log(content);
 

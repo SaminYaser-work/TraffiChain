@@ -48,6 +48,20 @@ class CheckReg
 
             return $next($request);
         }
+        else if($regType == 'police'){
+            $request->validate(
+                [
+                    'name' => 'required|min:3|string',
+                    'walletAddress' => 'required|string|unique:App\Models\police,WALLET_ADDRESS',
+                    'station' => 'required|string',
+                    'rank' => 'required|string',
+                    'badge' => 'required|int|digits:5|unique:App\Models\police,BADGE_NUMBER',
+                ]
+            );
+
+            return $next($request);
+        }
+
         else{
             return redirect('home');
         }

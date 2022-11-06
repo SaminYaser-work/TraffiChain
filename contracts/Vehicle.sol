@@ -2,25 +2,45 @@
 pragma solidity 0.8.17;
 
 contract Vehicle {
-    // enum Status {
-    //     normal,
-    //     impounded,
-    //     decommissioned
-    // }
+    enum Status {
+        normal,
+        impounded,
+        decommissioned,
+        registration_pending
+    }
 
-    // enum Class {
-    //     sedan,
-    //     suv,
-    //     microbus,
-    //     minibus,
-    //     bus
-    // }
+    enum Class {
+        sedan,
+        suv,
+        bus,
+        truck,
+        motorbike,
+        cng
+    }
 
-    // string private immutable i_chassisNo;
-    // string private immutable i_name;
-    // Status private status;
-    // Class private class;
+    enum Type {
+        government,
+        civilian,
+        special
+    }
 
-    // constructor(string memory name, string memory chassisNo, )
+    string private chassisNo;
+    string private name;
+    Status private status;
+    Class private class;
+    Type private vehicleType;
+
+    constructor(
+        string memory name_,
+        string memory chassisNo_,
+        Class class_,
+        Type type_
+    ) {
+        name = name_;
+        chassisNo = chassisNo_;
+        vehicleType = type_;
+        class = class_;
+        status = Status.registration_pending;
+    }
 
 }

@@ -37,17 +37,16 @@
                 <!-- Modal body -->
                 <div class="p-6 space-y-6">
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="modalBodyText">
-                        Pay the fine of <span id="fineAmount"></span> BDT to resolve the ticket (Case Slip ID: <span
-                            id="caseSlipId"></span> )?
                     </p>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                     <button type="button" id="payTicketBtn"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Pay</button>
-                    <button type="button" id='closeModal'
-                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                        Dismiss</button>
+                    <button type="button" id="convictBtn"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Convict</button>
                 </div>
             </div>
         </div>
@@ -63,18 +62,13 @@
                         Police
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Judge
+                        Driver
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Fine
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Remaining Time
-                    </th>
-                    <th scope="col" class="py-3 px-6">
                         Status
-                    </th>
-                    <th scope="col" class="py-3 px-6">
                     </th>
                     <th scope="col" class="py-3 px-6">
                     </th>
@@ -85,30 +79,16 @@
                 <script>
                     // TODO: Add a loading animation
 
-
-                    // TODO: Get better date formatter
-                    function format_time(s) {
-                        // const dtFormat = new Intl.DateTimeFormat('en-US', {
-                        //     dateSytle: 'full',
-                        //     timeStyle: 'full',
-                        //     timeZone: 'Asia/Dhaka'
-                        // });
-
-                        // return dtFormat.format(new Date(s * 1e3));
-                        return Math.round(s / 86400) + ' days';
-                    }
-
-                    function show_modal(address, fine, ticketContract) {
-                        // modal.setAttribute('aria-hidden', 'false');
-
+                    function show_modal(address) {
                         const closeModals = document.querySelectorAll("[id='closeModal']");;
                         const modal = document.getElementById('modal');
                         const payTicketBtn = document.getElementById('payTicketBtn');
+                        const convictBtn = document.getElementById('convictBtn');
                         const modalHeader = document.getElementById('modalHeader');
                         const modalBodyText = document.getElementById('modalBodyText');
 
-                        modalHeader.innerHTML = 'Pay Ticket';
-                        modalBodyText.textContent = `Pay the fine of ${fine} BDT to resolve the ticket (Case Slip ID: ${address} )?`;
+                        modalHeader.innerHTML = 'Give Verdict';
+                        modalBodyText.textContent = `Issue ruling on ticket Case Slip ID: ${address}. This action cannot be undone.`;
 
                         for (let index = 0; index < closeModals.length; index++) {
                             closeModals[index].onclick = (e) => {
@@ -118,12 +98,30 @@
 
                         modal.classList.toggle('hidden');
 
+                        const ticketContract = window.TicketContractInstance(
+                            address,
+                            '<?php echo $userInfo->WALLET_ADDRESS; ?>'
+                        );
+
                         payTicketBtn.addEventListener('click', async () => {
                             payTicketBtn.textContent = 'Please Wait...';
                             try {
-                                await ticketContract.resolveTicket(2);
+                                await ticketContract.resolveTicket(5);
                                 location.reload();
                             } catch (e) {
+                                payTicketBtn.textContent = 'Dismiss';
+                                console.log(e);
+                                alert('Something went wrong. Please try again later.');
+                            }
+                        });
+
+                        convictBtn.addEventListener('click', async () => {
+                            convictBtn.textContent = 'Please Wait...';
+                            try {
+                                await ticketContract.resolveTicket(7);
+                                location.reload();
+                            } catch (e) {
+                                convictBtn.textContent = 'Convict';
                                 console.log(e);
                                 alert('Something went wrong. Please try again later.');
                             }
@@ -131,76 +129,21 @@
 
                     };
 
-                    function contestTicket(address) {
-
-                        const closeModals = document.querySelectorAll("[id='closeModal']");;
-                        const modal = document.getElementById('modal');
-                        const payTicketBtn = document.getElementById('payTicketBtn');
-                        const modalHeader = document.getElementById('modalHeader');
-                        const modalBodyText = document.getElementById('modalBodyText');
-
-                        payTicketBtn.textContent = 'Contest';
-
-                        modalHeader.textContent = 'Request for a Trial';
-                        modalBodyText.textContent = 'Do you want to contest the ticket at the court? Case Slip ID: ' + address + '?';
-
-                        for (let index = 0; index < closeModals.length; index++) {
-                            closeModals[index].onclick = (e) => {
-                                modal.classList.add('hidden');
-                            }
-                        }
-
-                        modal.classList.toggle('hidden');
-
-                        payTicketBtn.addEventListener('click', async () => {
-                            payTicketBtn.textContent = 'Please Wait...';
-                            const ticketContract = window.TicketContractInstance(address,
-                                '<?php echo $userInfo->WALLET_ADDRESS; ?>');
-
-                            const judgeAddress = await window.judgeContractFactory.getNextJudge();
-
-                            const res = await window.judgeContractFactory.assignJudgeToTicket(
-                                address,
-                                judgeAddress
-                            );
-
-                            try {
-                                await ticketContract.requestHearing(judgeAddress);
-                            } catch (e) {
-                                console.log('Error while requesting hearing... Removing judge');
-                                await window.judgeContractFactory
-                                    .removeJudgeFromTicket(judgeAddress,
-                                        address);
-                                alert('Something went wrong. Please try again later.');
-                            }
-                            location.reload();
-                        });
-
-                    }
-
                     (async () => {
                         const tbody = document.querySelector('tbody');
 
-                        const tickets = await window.ticketContractFactory.getAllTickets(
-                            '<?php echo $userInfo->WALLET_ADDRESS; ?>'
+                        const judge = '<?php echo $userInfo->WALLET_ADDRESS; ?>';
+                        const tickets = await window.judgeContractFactory.getAllTickets(
+                            judge
                         );
+
+                        console.log(tickets);
 
                         tickets.forEach(async (address) => {
                             const ticketContract = window.TicketContractInstance(address);
 
                             const policeWalletAddress = await ticketContract.getOfficerAddress();
-
-
-                            let judgeWalletAddress = 'Not Assigned';
-                            try {
-                                judgeWalletAddress = await ticketContract.getJudgeAddress();
-                                judgeWalletAddress = judgeWalletAddress.slice(0, 5) + '***' +
-                                    judgeWalletAddress
-                                    .slice(-5);
-                            } catch (err) {
-                                // console.log('No judge assigned yet');
-                            }
-
+                            const driverWalletAddress = await ticketContract.getDriverAddress();
 
                             const charges = await ticketContract.getCharges();
 
@@ -210,23 +153,13 @@
                             // console.log(res2);
                             const fineAmount = await window.infractionContract.calculateTotalFine(charges);
 
-                            let deadline = '';
-                            try {
-                                deadline = await ticketContract.getRemainingTime();
-                                deadline = format_time(deadline);
-                            } catch (e) {
-                                console.log('Ticket already resolved');
-                                deadline = 'N/A';
-                            }
-
                             const status = await ticketContract.checkStatus();
 
                             const ticketInfo = [
                                 address.slice(0, 5) + '***' + address.slice(-5),
                                 policeWalletAddress.slice(0, 5) + '***' + policeWalletAddress.slice(-5),
-                                judgeWalletAddress,
+                                driverWalletAddress.slice(0, 5) + '***' + driverWalletAddress.slice(-5),
                                 fineAmount.toString() + ' BDT',
-                                deadline,
                                 status
                             ];
 
@@ -247,46 +180,27 @@
 
 
                             styleClasses = [
-                                'font-medium', 'text-blue-600', 'dark:text-blue-500', 'enabled:hover:underline',
+                                'font-medium', 'text-blue-600', 'dark:text-blue-500',
+                                'enabled:hover:underline',
                                 'disabled:text-slate-400', 'disabled:dark:text-slate-400',
                                 'disabled:cursor-not-allowed'
                             ];
-                            // Pay Ticket Button
+                            // Give Verdict button
                             let td = document.createElement('td');
                             td.classList.add('py-3', 'px-6');
-                            let payButton = document.createElement('button');
-                            if (status == 'Pending' || status == 'Late') {
-                                payButton.addEventListener('click', () => {
+                            let verdictButton = document.createElement('button');
+                            if (status == 'Disputing') {
+                                verdictButton.addEventListener('click', () => {
                                     show_modal(address, fineAmount, ticketContract);
                                 });
                             } else {
-                                payButton.setAttribute('disabled', 'true');
+                                verdictButton.setAttribute('disabled', 'true');
                             }
-                            payButton.classList.add(...styleClasses);
-                            payButton.setAttribute('type', 'button');
-                            payButton.appendChild(document.createTextNode('Pay'));
-                            td.appendChild(payButton);
+                            verdictButton.classList.add(...styleClasses);
+                            verdictButton.setAttribute('type', 'button');
+                            verdictButton.appendChild(document.createTextNode('Give Verdict'));
+                            td.appendChild(verdictButton);
                             tr.appendChild(td);
-
-
-                            // Contest button
-                            td = document.createElement('td');
-                            td.classList.add('py-3', 'px-6');
-                            const contestButton = document.createElement('button');
-
-                            if (status == 'Pending' || status == 'Late') {
-                                contestButton.addEventListener('click', () => contestTicket(address));
-                            } else {
-                                contestButton.setAttribute('disabled', 'true');
-                            }
-
-                            contestButton.setAttribute('type', 'button');
-                            contestButton.classList.add(...styleClasses);
-                            contestButton.appendChild(document.createTextNode(
-                                'Contest'));
-                            td.appendChild(contestButton);
-                            tr.appendChild(td);
-
 
                             tbody.appendChild(tr);
                         })

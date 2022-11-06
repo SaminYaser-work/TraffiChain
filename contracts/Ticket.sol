@@ -22,9 +22,9 @@ contract Ticket is AccessControl {
     // Paid: Driver has paid the fine and ticket is closed
     // Cancelled: Ticket is cancelled by the police due to some reason
     // disputing: Ticket is being disputed in the court by the request of the driver
-    // dismissed: Ticket is dismissed by the court
+    // dismissed: Ticket is dismissed by the court in favor of the driver
     // unresolvable: ???
-    // Convicted: Ticket is convicted by the court
+    // Convicted: Driver is convicted by the court and has to pay the fine
     enum Status {
         pending,
         late,

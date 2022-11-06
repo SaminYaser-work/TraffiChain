@@ -15,6 +15,9 @@ const TicketContract = require("../../build/contracts/Ticket.json");
 const InfractionsContract = require("../../build/contracts/Infractions.json");
 const JudgeFactoryContract = require("../../build/contracts/JudgeFactory.json");
 const JudgeContract = require("../../build/contracts/Judge.json");
+const PoliceFactoryContract = require("../../build/contracts/PoliceFactory.json");
+const PoliceContract = require("../../build/contracts/Police.json");
+const VehicleFactoryContract = require("../../build/contracts/VehicleFactory.json");
 
 window.driverContractFactoryABI = DriverFactoryContract.abi;
 window.driverContractABI = DriverContract.abi;
@@ -23,8 +26,9 @@ window.ticketContractABI = TicketContract.abi;
 window.infractionContractABI = InfractionsContract.abi;
 window.judgeFactoryContractABI = JudgeFactoryContract.abi;
 window.judgeContractABI = JudgeContract.abi;
-
-// console.log(window.ticketFactoryContractABI);
+window.policeFactoryContractABI = PoliceFactoryContract.abi;
+window.policeContractABI = PoliceContract.abi;
+window.VehicleFactoryContractABI = VehicleFactoryContract.abi;
 
 const ganacheRPCUrl = "http://127.0.0.1:7545";
 const systemProvider = new ethers.providers.JsonRpcProvider(ganacheRPCUrl);
@@ -46,6 +50,14 @@ const {
     deployedJudgeFactoryContractAddress,
 } = require("./judgeFactoryAddress.js");
 
+const {
+    deployedPoliceFactoryContractAddress,
+} = require("./policeFactoryAddress.js");
+
+const {
+    deployedVehicleFactoryContractAddress,
+} = require("./vehicleFactoryAddress.js");
+
 const getSigner = (address = systemWalletAddress) => {
     const ganacheRPCUrl = "http://127.0.0.1:7545";
     const provider = new ethers.providers.JsonRpcProvider(ganacheRPCUrl);
@@ -66,6 +78,14 @@ window.ticketContractFactory = new ethers.Contract(
     window.systemSigner
 );
 
+window.ticketContractFactory2 = (address) => {
+    return new ethers.Contract(
+        deployedTicketFactoryContractAddress,
+        window.ticketFactoryContractABI,
+        getSigner(address)
+    );
+};
+
 window.judgeContractFactory = new ethers.Contract(
     deployedJudgeFactoryContractAddress,
     window.judgeFactoryContractABI,
@@ -75,6 +95,26 @@ window.judgeContractFactory = new ethers.Contract(
 window.infractionContract = new ethers.Contract(
     deployedInfractionsContractAddress,
     window.infractionContractABI,
+    window.systemSigner
+);
+
+window.policeContractFactory = new ethers.Contract(
+    deployedPoliceFactoryContractAddress,
+    window.policeFactoryContractABI,
+    window.systemSigner
+);
+
+window.policeContractFactory2 = (address) => {
+    return new ethers.Contract(
+        deployedPoliceFactoryContractAddress,
+        window.policeFactoryContractABI,
+        getSigner(address)
+    );
+};
+
+window.VehicleFactoryContract = new ethers.Contract(
+    deployedVehicleFactoryContractAddress,
+    window.VehicleFactoryContractABI,
     window.systemSigner
 );
 
@@ -112,6 +152,14 @@ window.JudgeContractInstance = (contractAddress, signerAddress) => {
     return new ethers.Contract(
         contractAddress,
         window.judgeContractABI,
+        getSigner(signerAddress)
+    );
+};
+
+window.PoliceContractInstance = (contractAddress, signerAddress) => {
+    return new ethers.Contract(
+        contractAddress,
+        window.policeContractABI,
         getSigner(signerAddress)
     );
 };

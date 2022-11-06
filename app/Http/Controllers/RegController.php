@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\driver;
 use App\Models\judge;
+use App\Models\police;
 
 class RegController extends Controller
 {
@@ -101,14 +102,26 @@ class RegController extends Controller
         }
         else if($regType == 'police'){
 
+            $police = new police();
+            $police->WALLET_ADDRESS = $request->walletAddress;
+            $police->NAME = $request->name;
+            $police->STATION = $request->station;
+            $police->RANK = $request->rank;
+            $police->BADGE_NUMBER = $request->badge;
 
-            // $police = new police();
-            // $police->WALLET_ADDRESS = $request->walletAddress;
-            // $police->NAME = $request->name;
-            // $police->save();
+            // TODO: Generate scoring algorithm
+            $police->SCORE = rand(0, 100);
+
+            $police->save();
+
+            return response()->json([
+                'walletAddress' => $request->walletAddress,
+                'name' => $request->name,
+                'station' => $request->station,
+                'rank' => $request->rank,
+                'badge' => $request->badge
+            ], 200);
+
         }
-
-
-
     }
 }

@@ -1,15 +1,15 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/judgeFactoryAddress.js":
-/*!*********************************************!*\
-  !*** ./resources/js/judgeFactoryAddress.js ***!
-  \*********************************************/
+/***/ "./resources/js/vehicleFactoryAddress.js":
+/*!***********************************************!*\
+  !*** ./resources/js/vehicleFactoryAddress.js ***!
+  \***********************************************/
 /***/ ((module) => {
 
-var deployedJudgeFactoryContractAddress = "0x7D201f7601F953bD0013f0bb630FB47f69a5aE0D";
+var deployedVehicleFactoryContractAddress = "0x7914E4170dE63736cFAE693E384aEEaD44753331";
 module.exports = {
-  deployedJudgeFactoryContractAddress: deployedJudgeFactoryContractAddress
+  deployedVehicleFactoryContractAddress: deployedVehicleFactoryContractAddress
 };
 
 /***/ })
@@ -45,7 +45,7 @@ module.exports = {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__("./resources/js/judgeFactoryAddress.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./resources/js/vehicleFactoryAddress.js");
 /******/ 	
 /******/ })()
 ;

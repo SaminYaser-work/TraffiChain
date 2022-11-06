@@ -50,6 +50,7 @@ Route::get('/profile', [ProfileController::class, 'showProfile'])
 Route::get('/profile/tickets', [ProfileController::class, 'showTickets']);
 Route::get('/profile/vehicle', [ProfileController::class, 'registerVehicleForm']);
 Route::get('/profile/update', [ProfileController::class, 'updateProfileForm']);
+Route::get('/profile/issue-ticket', [ProfileController::class, 'issueTicket']);
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])
     ->middleware('checkUpdate');
 Route::post('/profile/vehicle', [ProfileController::class, 'registerVehicle']);
