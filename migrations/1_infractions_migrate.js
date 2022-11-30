@@ -42,6 +42,7 @@ module.exports = async function (deployer) {
         400,
         "আদেশ অমান্য, বাঁধা সৃষ্টি ও তথ্য প্রদানে অস্বীকৃতি"
     );
+    await InfractionsContract.addInfraction(130, 1000, "Late Fees");
 
     content = `const deployedInfractionsContractAddress = "${instance.address}"; export {deployedInfractionsContractAddress};`;
     console.log(content);

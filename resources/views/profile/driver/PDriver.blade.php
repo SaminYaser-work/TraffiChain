@@ -130,38 +130,6 @@
                 </svg>
             </a>
 
-            <script>
-                (async () => {
-                    const tickets = await window.ticketContractFactory.getActiveTickets(
-                        '<?php echo $userInfo->WALLET_ADDRESS; ?>'
-                    );
-                    console.log('tickets: ', tickets);
-
-                    const numOfTickets = tickets.length;
-                    const ticketCounter = document.getElementById('ticketCounter');
-                    const noTickets = document.getElementById('noTickets');
-                    const linkText = document.getElementById('linkText');
-                    const goodText = document.getElementById('goodText');
-
-                    ticketCounter.textContent = numOfTickets;
-
-                    if (numOfTickets == 0) {
-                        // ticketCounter.classList.remove('text-red-600');
-                        // ticketCounter.classList.add('text-green-600');
-                        noTickets.classList.add('text-green-600');
-                        noTickets.classList.remove('text-red-600');
-                        linkText.textContent = 'See History';
-                        goodText.classList.remove('hidden');
-                    } else {
-                        noTickets.classList.add('text-red-600');
-                        noTickets.classList.remove('text-green-600');
-                        // ticketCounter.classList.remove('text-green-600');
-                        // ticketCounter.classList.add('text-red-600');
-                        linkText.textContent = 'Resolve Tickets';
-                        // goodText.classList.add('hidden');
-                    }
-                })();
-            </script>
 
         </div>
 
@@ -180,7 +148,12 @@
                 <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Your Score</h5>
             </div>
 
-            @if ($userInfo->SCORE >= 1000)
+            <div class="grid place-items-center mb-5">
+                <p id="scoreDisplay" class="text-6xl lg:text-8xl"></p>
+            </div>
+            <p id="scoreComment" class="text-center"></p>
+
+            {{-- @if ($userInfo->SCORE >= 1000)
                 <div class="grid place-items-center mb-5">
                     <p class="text-6xl lg:text-8xl text-green-600">{{ $userInfo->SCORE }}</p>
                 </div>
@@ -211,10 +184,75 @@
                 <p class="text-red-600">
                     Your license is at risk. <br> Please be more careful
                 </p>
-            @endif
+            @endif --}}
 
         </div>
 
+        <script>
+            (async () => {
+                const tickets = await window.ticketContractFactory.getActiveTickets(
+                    '<?php echo $userInfo->WALLET_ADDRESS; ?>'
+                );
+                console.log('tickets: ', tickets);
+
+                let score = 100 - (tickets.length * 10);
+
+                const scoreDisplay = document.getElementById('scoreDisplay');
+                const scoreComment = document.getElementById('scoreComment');
+
+                if (score > 100) {
+                    scoreDisplay.innerHTML = score;
+                    scoreDisplay.classList.add('text-green-600');
+                    scoreComment.innerHTML = 'You are an excellent driver.';
+                    scoreComment.classList.add('text-green-600');
+                } else if (score >= 80) {
+                    scoreDisplay.innerHTML = score;
+                    scoreDisplay.classList.add('text-green-400');
+                    scoreComment.innerHTML = 'You are a great driver.';
+                    scoreComment.classList.add('text-green-400');
+                } else if (score >= 60) {
+                    scoreDisplay.innerHTML = score;
+                    scoreDisplay.classList.add('text-yellow-400');
+                    scoreComment.innerHTML = 'Apart from occasional hiccups, you do ok behind the wheels.';
+                    scoreComment.classList.add('text-yellow-400');
+                } else if (score >= 30) {
+                    scoreDisplay.innerHTML = score;
+                    scoreDisplay.classList.add('text-red-500');
+                    scoreComment.innerHTML = 'You need to be more careful while driving.';
+                    scoreComment.classList.add('text-red-500');
+                } else if (score >= 10) {
+                    scoreDisplay.innerHTML = score;
+                    scoreDisplay.classList.add('text-red-600');
+                    scoreComment.innerHTML = 'Your license is at risk. Please be more careful.';
+                    scoreComment.classList.add('text-red-600');
+                }
+
+
+                const numOfTickets = tickets.length;
+                const ticketCounter = document.getElementById('ticketCounter');
+                const noTickets = document.getElementById('noTickets');
+                const linkText = document.getElementById('linkText');
+                const goodText = document.getElementById('goodText');
+
+                ticketCounter.textContent = numOfTickets;
+
+                if (numOfTickets == 0) {
+                    // ticketCounter.classList.remove('text-red-600');
+                    // ticketCounter.classList.add('text-green-600');
+                    noTickets.classList.add('text-green-600');
+                    noTickets.classList.remove('text-red-600');
+                    linkText.textContent = 'See History';
+                    goodText.classList.remove('hidden');
+                } else {
+                    noTickets.classList.add('text-red-600');
+                    noTickets.classList.remove('text-green-600');
+                    // ticketCounter.classList.remove('text-green-600');
+                    // ticketCounter.classList.add('text-red-600');
+                    linkText.textContent = 'Resolve Tickets';
+                    // goodText.classList.add('hidden');
+                }
+            })();
+        </script>
 
         {{-- Vehicle --}}
         <div class="p-6 h-fit bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -295,9 +333,9 @@
                         <p class="text-slate-500">
                             No vehicles found.
                         </p>
-                        <p class="text-slate-400">
+                        {{-- <p class="text-slate-400">
                             Damn bruh, you're poor as hell 😭
-                        </p>
+                        </p> --}}
 
 
                     </div>

@@ -1,1 +1,1 @@
-const deployedJudgeFactoryContractAddress = "0x7D201f7601F953bD0013f0bb630FB47f69a5aE0D"; module.exports = { deployedJudgeFactoryContractAddress};
+const deployedJudgeFactoryContractAddress = "0x64f380D8Dc7AE4e1F58f77bba47e7C7303B6b48c"; module.exports = { deployedJudgeFactoryContractAddress};

@@ -41,7 +41,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "deployedDriverFactoryContractAddress": () => (/* binding */ deployedDriverFactoryContractAddress)
 /* harmony export */ });
-var deployedDriverFactoryContractAddress = "0x03127a34FeB4451Eb279085b2cFf9CBc2b1CB39A";
+var deployedDriverFactoryContractAddress = "0x2C8A42f734301afB2393529E115B9e5189909D62";
 
 /******/ })()
 ;

@@ -30,7 +30,8 @@ contract Infractions {
 
     function calculateTotalFine(uint16[] memory infractionList) external view returns(uint256) {
         uint256 totalFine = 0;
-        for (uint256 i = 0; i < infractionList.length; i++) {
+        uint256 len = infractionList.length;
+        for (uint256 i = 0; i < len; i++) {
             totalFine += infractionToFine[infractionList[i]];
         }
         return totalFine;

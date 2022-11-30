@@ -75,7 +75,8 @@ class RegController extends Controller
             $driver->LICENSE_EXPIRY_DATE = $request->exp;
 
             // TODO: Generate scoring algorithm
-            $driver->SCORE = rand(0, 100);
+            // $driver->SCORE = rand(0, 100);
+            $driver->SCORE = 80;
 
             $driver->save();
 

@@ -5,10 +5,8 @@
 @endsection
 
 @section('header')
-    Tickets Cited to
-    <span class="font-bold">
-        {{ $userInfo->NAME }}
-    </span>
+    Ongoing Cases assigned to
+    {{ $userInfo->NAME }}
 @endsection
 
 @section('content')

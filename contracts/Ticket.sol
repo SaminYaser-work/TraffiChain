@@ -78,6 +78,10 @@ contract Ticket is AccessControl {
         _setupRole(CANCEL_TICKET_ROLE, msg.sender);
     }
 
+    function addCharge(uint16 charge) internal {
+        penalty_clasues.push(charge);
+    }
+
     /// @notice Owner can request a hearing in court
     /// @dev must provide wallet address of the judge
     function requestHearing(address judge_) public checkActive onlyRole(DRIVER_ROLE) {
@@ -92,7 +96,7 @@ contract Ticket is AccessControl {
         emit StatusChanged(address(this), status);
     }
 
-    function checkStatus() external view returns(string memory) {
+    function checkStatus() public view returns(string memory) {
 
         // return uint256(status);
         // Ugly but gas efficient
@@ -105,6 +109,11 @@ contract Ticket is AccessControl {
         if (status == Status.unresolvable) return "Unresolvalble";
         if (status == Status.convicted) return "Convicted";
         return "Error";
+    }
+
+    /// @dev set interval in days
+    function setInterval(uint256 interval_) internal {
+        interval = interval_;
     }
 
     /// @notice Resolves the ticket for good.
@@ -124,10 +133,26 @@ contract Ticket is AccessControl {
         emit StatusChanged(address(this), status);
     }
 
-    /// @dev set interval in days
-    function setInterval(uint256 interval_) external checkActive onlyRole(OFFICER_ROLE) {
-        interval = interval_;
+    /// @notice update the state of the ticket for demo
+    function updateStatusDemo() public {
+        interval = 0;
+
+        status = Status.late;
+        addCharge(130);
+        strikes++;
+        interval = 30 days;
+
+        // if (strikes == 3) {
+        //     status = Status.unresolvable;
+        //     isActive = false;
+        // } else if (getRemainingTime() <= 0) {
+        //     status = Status.late;
+        //     addCharge(100);
+        //     strikes++;
+        //     interval = interval * 2;
+        // }
     }
+
 
     function isPayable() public view returns(bool) {
         if (status == Status.pending || status == Status.late) {
@@ -159,10 +184,29 @@ contract Ticket is AccessControl {
         return penalty_clasues;
     }
 
+    function getTicketInfo() external view returns(
+        address,
+        address,
+        address,
+        uint16[] memory,
+        uint256,
+        string memory
+    ) {
+        return (
+            driver,
+            officer,
+            judge,
+            penalty_clasues,
+            getRemainingTime(),
+            checkStatus()
+        );
+    }
 
-    function getRemainingTime() external view returns(uint256) {
+
+    function getRemainingTime() internal view returns(uint256) {
         if(!isActive) {
-            revert Ticket__inactive();
+            // revert Ticket__inactive();
+            return 0;
         }
 
         return (lastTimeStamp + interval) - block.timestamp;

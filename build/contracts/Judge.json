@@ -4566,15 +4566,15 @@
     "absolutePath": "project:/contracts/Judge.sol",
     "exportedSymbols": {
       "Judge": [
-        1006
+        1010
       ]
     },
-    "id": 1007,
+    "id": 1011,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 992,
+        "id": 996,
         "literals": [
           "solidity",
           "0.8",
@@ -4590,15 +4590,15 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "documentation": {
-          "id": 993,
+          "id": 997,
           "nodeType": "StructuredDocumentation",
           "src": "169:72:9",
           "text": "@title Judge\n @author Samin Yaser\n @notice Profile of a judge"
         },
         "fullyImplemented": true,
-        "id": 1006,
+        "id": 1010,
         "linearizedBaseContracts": [
-          1006
+          1010
         ],
         "name": "Judge",
         "nameLocation": "250:5:9",
@@ -4606,12 +4606,12 @@
         "nodes": [
           {
             "constant": false,
-            "id": 995,
+            "id": 999,
             "mutability": "mutable",
             "name": "name",
             "nameLocation": "278:4:9",
             "nodeType": "VariableDeclaration",
-            "scope": 1006,
+            "scope": 1010,
             "src": "263:19:9",
             "stateVariable": true,
             "storageLocation": "default",
@@ -4620,7 +4620,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 994,
+              "id": 998,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "263:6:9",
@@ -4633,23 +4633,23 @@
           },
           {
             "body": {
-              "id": 1004,
+              "id": 1008,
               "nodeType": "Block",
               "src": "322:29:9",
               "statements": [
                 {
                   "expression": {
-                    "id": 1002,
+                    "id": 1006,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 1000,
+                      "id": 1004,
                       "name": "name",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 995,
+                      "referencedDeclaration": 999,
                       "src": "332:4:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -4659,11 +4659,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 1001,
+                      "id": 1005,
                       "name": "name_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 997,
+                      "referencedDeclaration": 1001,
                       "src": "339:5:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -4676,13 +4676,13 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 1003,
+                  "id": 1007,
                   "nodeType": "ExpressionStatement",
                   "src": "332:12:9"
                 }
               ]
             },
-            "id": 1005,
+            "id": 1009,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -4690,17 +4690,17 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 998,
+              "id": 1002,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 997,
+                  "id": 1001,
                   "mutability": "mutable",
                   "name": "name_",
                   "nameLocation": "315:5:9",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1005,
+                  "scope": 1009,
                   "src": "301:19:9",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -4709,7 +4709,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 996,
+                    "id": 1000,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "301:6:9",
@@ -4724,19 +4724,19 @@
               "src": "300:21:9"
             },
             "returnParameters": {
-              "id": 999,
+              "id": 1003,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "322:0:9"
             },
-            "scope": 1006,
+            "scope": 1010,
             "src": "289:62:9",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1007,
+        "scope": 1011,
         "src": "241:113:9",
         "usedErrors": []
       }
@@ -4749,7 +4749,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-06T14:57:20.434Z",
+  "updatedAt": "2022-11-28T05:49:11.941Z",
   "devdoc": {
     "author": "Samin Yaser",
     "kind": "dev",
