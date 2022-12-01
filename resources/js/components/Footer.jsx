@@ -66,5 +66,5 @@ export default Footer;
 if (document.getElementById("footer__react")) {
     ReactDOM.render(<Footer />, document.getElementById("footer__react"));
 } else {
-    console.log("element not found to render react component");
+    console.log("element not found to render react footer component");
 }

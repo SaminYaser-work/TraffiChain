@@ -2,5 +2,5 @@
 
 // require("./components/Example");
 
-// require("./components/NavBar");
+require("./components/NavBar");
 require("./components/Footer");

@@ -30,8 +30,13 @@
     class="text-white min-h-screen font-['Cubano Regular']">
 
 
+    <script>
+        window.accType = "{{ Session::get('accType') }}";
+    </script>
 
-    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-transparent">
+    <div id="navbar__react"></div>
+
+    {{-- <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-transparent">
 
         <div class="container flex flex-wrap justify-between items-center mx-auto">
 
@@ -73,20 +78,6 @@
 
                     </li>
 
-                    {{-- <li>
-
-                        <a href="#"
-                            class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="#"
-                            class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
-
-                    </li> --}}
-
                     <li>
 
                         <a href="{{ url('register') }}"
@@ -110,7 +101,7 @@
 
         </div>
 
-    </nav>
+    </nav> --}}
 
 
 
@@ -127,31 +118,6 @@
 
     </div>
 
-
-    {{-- <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
-        <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="{{ url('/home') }}" class="flex items-center mb-4 sm:mb-0">
-                <img src="{{ url('/images/logo.png') }}" class="mr-3 h-8" alt="TraffiChain Logo">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">TraffiChain</span>
-            </a>
-            <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
-                <li>
-                    <a href="{{ url('/home') }}" class="mr-4 hover:underline md:mr-6 ">Home</a>
-                </li>
-                <li>
-                    <a href="{{ url('/register') }}" class="mr-4 hover:underline md:mr-6 ">Register</a>
-                </li>
-                <li>
-                    <a href="{{ url('/login') }}" class="mr-4 hover:underline md:mr-6 ">Login</a>
-                </li>
-                <li>
-            </ul>
-        </div>
-        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
-        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="#"
-                class="hover:underline">TraffiChain™</a>. All Rights Reserved.
-        </span>
-    </footer> --}}
 
     <div id="footer__react"></div>
 
