@@ -14,6 +14,7 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ url('/js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ url('/js/react.js') }}" defer></script>
 
     @yield('script')
 
@@ -155,6 +156,7 @@
                 class="hover:underline">TraffiChain™</a>. All Rights Reserved.
         </span>
     </footer>
+
 
 
 

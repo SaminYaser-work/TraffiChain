@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/loginMetaMask.js": "/js/loginMetaMask.js",
+    "/js/react.js": "/js/react.js",
     "/js/regM.js": "/js/regM.js",
     "/js/contractInfo.js": "/js/contractInfo.js",
     "/js/driverFactoryAddress.js": "/js/driverFactoryAddress.js",
