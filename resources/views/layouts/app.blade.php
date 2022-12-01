@@ -128,7 +128,7 @@
     </div>
 
 
-    <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+    {{-- <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
         <div class="sm:flex sm:items-center sm:justify-between">
             <a href="{{ url('/home') }}" class="flex items-center mb-4 sm:mb-0">
                 <img src="{{ url('/images/logo.png') }}" class="mr-3 h-8" alt="TraffiChain Logo">
@@ -145,17 +145,15 @@
                     <a href="{{ url('/login') }}" class="mr-4 hover:underline md:mr-6 ">Login</a>
                 </li>
                 <li>
-                    {{-- <li>
-                    <a href="#" class="hover:underline">Contact</a>
-                </li> --}}
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
-        {{-- TODO: Add github link --}}
         <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="#"
                 class="hover:underline">TraffiChain™</a>. All Rights Reserved.
         </span>
-    </footer>
+    </footer> --}}
+
+    <div id="footer__react"></div>
 
 
 

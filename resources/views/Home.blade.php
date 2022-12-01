@@ -8,10 +8,6 @@
 
 @section('content')
 
-    <div id="example">
-
-    </div>
-
 
     <section class="flex items-center flex-col min-h-screen w-full">
         <div>
