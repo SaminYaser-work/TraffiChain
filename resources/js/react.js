@@ -4,3 +4,5 @@
 
 require("./components/NavBar");
 require("./components/Footer");
+require("./components/RegSel");
+// require("./components/RainbowKitLogin");

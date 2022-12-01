@@ -192,6 +192,71 @@ if (document.getElementById("navbar__react")) {
 
 /***/ }),
 
+/***/ "./resources/js/components/RegSel.jsx":
+/*!********************************************!*\
+  !*** ./resources/js/components/RegSel.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function Example() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+      href: "/register/driver",
+      className: "block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+        className: "mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white",
+        children: "\uD83D\uDE98 Driver"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        className: "font-normal text-gray-700 dark:text-gray-400",
+        children: "Register as a driver or owner, add your vehicle, see active tickets, and more."
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+      href: "/register/police",
+      className: "block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+        className: "mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white",
+        children: "\uD83D\uDC6E Police"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        className: "font-normal text-gray-700 dark:text-gray-400",
+        children: "Register as a police officer, see issued tickets, and more."
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+      href: "/register/judge",
+      className: "block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+        className: "mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white",
+        children: "\uD83E\uDDD1\u200D\u2696\uFE0F Judge"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        className: "font-normal text-gray-700 dark:text-gray-400",
+        children: "Register as a judge, manage ongoing cases, and more."
+      })]
+    })]
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Example);
+
+if (document.getElementById("regsel")) {
+  console.log("Using react to render registration selection");
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Example, {}), document.getElementById("regsel"));
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/logo.png":
 /*!******************************************!*\
   !*** ./resources/js/components/logo.png ***!
@@ -31342,6 +31407,8 @@ var __webpack_exports__ = {};
 __webpack_require__(/*! ./components/NavBar */ "./resources/js/components/NavBar.jsx");
 
 __webpack_require__(/*! ./components/Footer */ "./resources/js/components/Footer.jsx");
+
+__webpack_require__(/*! ./components/RegSel */ "./resources/js/components/RegSel.jsx"); // require("./components/RainbowKitLogin");
 })();
 
 /******/ })()

@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <section class="flex justify-center align-middle gap-3">
+    <section id="regsel" class="flex justify-center align-middle gap-3">
 
-        <a href="{{ url('register/driver') }}"
+        {{-- <a href="{{ url('register/driver') }}"
             class="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 Driver / Owner 🚘
@@ -37,7 +37,7 @@
             <p class="font-normal text-gray-700 dark:text-gray-400">
                 Register as a judge, manage ongoing cases, and more.
             </p>
-        </a>
+        </a> --}}
 
 
     </section>
