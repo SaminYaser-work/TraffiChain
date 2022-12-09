@@ -1,1 +1,1 @@
-const deployedPoliceFactoryContractAddress = "0xdC3a945772EC02c5292968c92634eC9dD9c32FCA"; module.exports = {deployedPoliceFactoryContractAddress};
+const deployedPoliceFactoryContractAddress = "0xe5d27Aaf2fdbBBC23BdCAF742196D18BEfa6Ce44"; module.exports = {deployedPoliceFactoryContractAddress};

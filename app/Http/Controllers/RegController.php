@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -28,6 +27,24 @@ class RegController extends Controller
     function register()
     {
         return view('register.sel');
+    }
+
+    // API
+    function getAllDrivers() {
+        return DB::table('driver')->get()->all();
+    }
+
+    function getAllPolices() {
+        return DB::table('police')->get()->all();
+    }
+
+    function getAllJudges() {
+        return DB::table('judge')->get()->all();
+    }
+
+    function regDriver(Request $req)
+    {
+        return $req;
     }
 
     function driverReg()

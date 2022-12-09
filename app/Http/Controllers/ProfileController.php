@@ -81,6 +81,7 @@ class ProfileController extends Controller
     }
 
 
+
     function registerVehicleForm()
     {
         $userInfo = $this->autheticate();
@@ -189,8 +190,6 @@ class ProfileController extends Controller
                 ->update([
                     'NAME' => $request->name,
                 ]);
-
-
         }
         else{
             dd('error');

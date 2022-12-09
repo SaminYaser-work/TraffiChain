@@ -16,7 +16,6 @@ const mix = require("laravel-mix");
 //     .sass('resources/sass/app.scss', 'public/css');
 
 mix.js("resources/js/app.js", "public/js")
-    .react()
     .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
     .js("resources/js/loginMetaMask.js", "public/js/loginMetaMask.js")
     .js("resources/js/react.js", "public/js/react.js")
@@ -42,4 +41,5 @@ mix.js("resources/js/app.js", "public/js")
     .js(
         "resources/js/vehicleFactoryAddress.js",
         "public/js/vehicleFactoryAddress.js"
-    );
+    )
+    .react();

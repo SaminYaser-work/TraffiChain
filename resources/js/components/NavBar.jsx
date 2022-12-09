@@ -5,7 +5,7 @@ import logo from "./logo.png";
 function NavBar() {
     return (
         <>
-            <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-transparent">
+            <nav className="bg-transparent border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-transparent">
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
                     <a href={"/home"} className="flex items-center">
                         <img
@@ -47,7 +47,7 @@ function NavBar() {
                         className="hidden w-full md:block md:w-auto"
                         id="navbar-default"
                     >
-                        <ul className="flex flex-col items-center gap-1 justify-center p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-transparent md:dark:bg-transparent dark:border-gray-700">
+                        <ul className="flex flex-col items-center gap-1 justify-center p-4 mt-4 rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white bg-transparent md:bg-transparent border-gray-700">
                             <li>
                                 <a
                                     href={"/home"}

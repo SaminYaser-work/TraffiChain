@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,6 @@ Route::get('/', function () {
 Route::get('/home', [PageController::class, 'home']);
 Route::get('/home/{age}', [PageController::class, 'setAge']);
 
-
 // Registration
 Route::get('/register', [RegController::class, 'register']);
 Route::get('/register/driver', [RegController::class, 'driverReg']);
@@ -47,6 +47,7 @@ Route::post('/login', [LoginController::class, 'doLogin']);
 Route::get('/profile', [ProfileController::class, 'showProfile'])
     ->middleware('checkLogin');
 
+Route::get('/profile/support', [MailController::class, 'index']);
 Route::get('/profile/tickets', [ProfileController::class, 'showTickets']);
 Route::get('/profile/vehicle', [ProfileController::class, 'registerVehicleForm']);
 Route::get('/profile/update', [ProfileController::class, 'updateProfileForm']);
@@ -64,3 +65,6 @@ Route::fallback(function () {
 
 // TODO: For debugging, remove this in production
 Route::get('/loggedin', [LoginController::class, 'showInfo']);
+Route::get('/lab', function() {
+    return view('lab');
+});
