@@ -196,7 +196,7 @@
                                                                     <h1
                                                                         style="margin: 0; color: #8412c0; direction: ltr; font-family: 'Cabin', Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 28px; font-weight: 400; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;">
                                                                         <span class="tinyMce-placeholder">
-                                                                            TraffiChain
+                                                                            Driver Support
                                                                         </span>
                                                                     </h1>
                                                                 </div>

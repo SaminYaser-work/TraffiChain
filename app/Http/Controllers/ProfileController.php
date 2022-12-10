@@ -93,17 +93,52 @@ class ProfileController extends Controller
         return redirect('login');
     }
 
+    function getAccType()
+    {
+        $accType = session()->get('accType');
+
+        return $accType;
+    }
+
+    function scoreComment(Request $req) {
+        $score = $req->score;
+
+        $data = ['comment' => '', 'color' => '', 'score' => $score];
+
+        if ($score == 100) {
+            $data['comment'] = 'You are an excellent driver';
+            $data['color'] = 'text-green-400';
+        } else if ($score >= 80) {
+            $data['comment'] = 'You are a great driver';
+            $data['color'] = 'text-green-400';
+        } else if ($score >= 60) {
+            $data['comment'] = 'You are a good driver';
+            $data['color'] = 'text-yellow-400';
+        } else if ($score >= 40) {
+            $data['comment'] = 'Your driving skills are below average';
+            $data['color'] = 'text-orange-500';
+        } else if ($score >= 20) {
+            $data['comment'] = 'Improve your score or your license will be revoked';
+            $data['color'] = 'text-red-500';
+        } else {
+            $data['comment'] = 'what';
+            $data['color'] = 'what';
+        }
+
+        return $data;
+    }
+
     function registerVehicle(Request $request)
     {
-        $request->validate(
-            [
-                'model' => 'required|min:3|string',
-                // 'chassis' => 'required|digits:10|string|unique:App/Models/vehicle,CHASSIS_NUMBER', // TODO: check if unique
-                'chassis' => 'required|digits:10|string',
-                'class' => 'required|string',
-                'type' => 'required|string',
-            ]
-        );
+        // $request->validate(
+        //     [
+        //         'model' => 'required|min:3|string',
+        //         // 'chassis' => 'required|digits:10|string|unique:App/Models/vehicle,CHASSIS_NUMBER', // TODO: check if unique
+        //         'chassis' => 'required|digits:10|string',
+        //         'class' => 'required|string',
+        //         'type' => 'required|string',
+        //     ]
+        // );
 
         $uuid = Str::uuid()->toString();
 
@@ -121,7 +156,7 @@ class ProfileController extends Controller
         $reg->save();
 
         // TODO: Flash application submitted alert
-        return redirect('profile');
+        // return redirect('profile');
     }
 
     function updateProfileForm()

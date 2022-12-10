@@ -17,7 +17,7 @@ class CreateRegisteredVehicleTable extends Migration
             $table->id();
             $table->integer('OWNER_ID');
             $table->string('REGISTRATION_NUMBER');
-            $table->string('STATUS')->default('PENDING');
+            $table->string('STATUS')->default('REGISTERED');
         });
     }
 

@@ -118,7 +118,7 @@
 
         <div class="flex items-center mb-5">
             <input id="terms" type="checkbox" value=""
-                class="w-4 h-4 text-blue-600 bg-blue-600 rounded border-gray-300 focus:ring-blue-500 selection:bg-blue-600">
+                class="w-4 h-4 text-blue-600 bg-transparent rounded border-gray-300 focus:ring-blue-500 selection:bg-blue-600">
             <label for="terms" class="ml-2 text-xs font-medium text-gray-900 dark:text-gray-300">
                 I testify that, I have provided the <strong class="text-blue-500">correct information.</strong>
             </label>

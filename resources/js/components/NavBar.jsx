@@ -1,8 +1,17 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import logo from "./logo.png";
 
 function NavBar() {
+    const [accType, setAccType] = useState("");
+
+    useEffect(() => {
+        axios.get("/api/accType").then((res) => {
+            setAccType(res.data);
+        });
+    }, []);
+
     return (
         <>
             <nav className="bg-transparent border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-transparent">
@@ -47,11 +56,11 @@ function NavBar() {
                         className="hidden w-full md:block md:w-auto"
                         id="navbar-default"
                     >
-                        <ul className="flex flex-col items-center gap-1 justify-center p-4 mt-4 rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white bg-transparent md:bg-transparent border-gray-700">
+                        <ul className="flex flex-col items-center gap-3 justify-center p-4 mt-4 rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white bg-transparent md:bg-transparent border-gray-700">
                             <li>
                                 <a
                                     href={"/home"}
-                                    className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                                    className="block py-2 px-4 text-white bg-amber-500 rounded"
                                     aria-current="page"
                                 >
                                     Home
@@ -61,7 +70,7 @@ function NavBar() {
                             <li>
                                 <a
                                     href={"/register"}
-                                    className="block py-2 px-3 text-white bg-slate-500 rounded"
+                                    className="block py-2 px-4 text-white bg-slate-300 rounded"
                                 >
                                     Register
                                 </a>
@@ -71,19 +80,30 @@ function NavBar() {
                                 {window.accType != "" ? (
                                     <a
                                         href={"/logout"}
-                                        className="block py-2 px-3 text-white bg-red-500 rounded"
+                                        className="block py-2 px-4 text-white bg-red-700 rounded"
                                     >
                                         Logout
                                     </a>
                                 ) : (
                                     <a
                                         href={"/login"}
-                                        className="block py-2 px-3 text-white bg-green-500 rounded"
+                                        className="block py-2 px-4 text-white bg-green-700 rounded"
                                     >
                                         Login
                                     </a>
                                 )}
                             </li>
+
+                            {window.accType != "" && (
+                                <li>
+                                    <a
+                                        href={"/profile/support"}
+                                        className="block py-2 px-3 text-white bg-red-500 rounded"
+                                    >
+                                        Support
+                                    </a>
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>

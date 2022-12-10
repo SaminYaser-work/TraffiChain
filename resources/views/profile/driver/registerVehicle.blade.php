@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('script')
-    <script type="text/javascript" src="{{ url('/js/regM.js') }}" defer></script>
-@endsection
+
 
 @section('title')
     Register Vehicle
@@ -13,7 +11,10 @@
 @endsection
 
 @section('content')
-    <form action="/profile/vehicle" method="POST">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <div id="regVehicle__react"></div>
+
+    {{-- <form action="/profile/vehicle" method="POST">
         @csrf
 
         <div class="relative z-0 mb-6 w-full group">
@@ -118,5 +119,5 @@
                 btn.disabled = true;
             }
         });
-    </script>
+    </script> --}}
 @endsection
