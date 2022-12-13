@@ -28,9 +28,26 @@
 <body style="background: linear-gradient(176deg, rgba(18,24,27,1) 50%, rgba(32,39,55,1) 100%);"
     class="text-white min-h-screen font-['Cubano Regular']">
 
+    <?php
+    $at = Session::get('accType');
+    $sess = Session::get('userInfo');
+    if ($sess != null) {
+        $wallet = $sess->WALLET_ADDRESS;
+        $id = $sess->id;
+    } else {
+        $wallet = '';
+        $id = '';
+    }
+    ?>
+
     <script>
-        window.accType = "{{ Session::get('accType') }}";
+        window.accType = "{{ $at }}";
+        window.wallet = "{{ $wallet }}";
+        window.id = "{{ $id }}";
+
+        console.log(window.accType, window.wallet, window.id);
     </script>
+
 
     <div id="navbar__react"></div>
 

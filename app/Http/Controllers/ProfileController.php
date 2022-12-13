@@ -46,10 +46,6 @@ class ProfileController extends Controller
         }
         else if ($accType == 'judge') {
             if ($userInfo) {
-                // $ticketInfo = DB::table('tickets')
-                //     ->where('JUDGE_WALLET_ADDRESS', $userInfo->WALLET_ADDRESS)
-                //     ->get();
-
                 return view('profile.judge.PJudge')
                     ->with('userInfo', $userInfo);
             } else {
@@ -68,6 +64,48 @@ class ProfileController extends Controller
         }
     }
 
+    //API
+    function getDriverInfo(Request $req) {
+        $data = DB::table('driver')->where('id', $req->id)->first();
+        return $data;
+    }
+
+    function getVehicleInfo(Request $req) {
+        $vehicleInfo = DB::table('vehicle')
+        ->join('registered_vehicles', 'vehicle.REGISTRATION_NUMBER', '=', 'registered_vehicles.REGISTRATION_NUMBER')
+        ->where('registered_vehicles.OWNER_ID', $req->id)
+        ->get();
+
+        return $vehicleInfo;
+    }
+
+    function getFooter() {
+        return "TraffiChain™";
+    }
+
+    function getRegText() {
+        $data = [
+            [
+                'title' => '🚘 Driver',
+                'text' => 'Register as a driver or owner, add your vehicle, see active tickets, and more.',
+                'link' => '/register/driver'
+            ],
+            [
+                'title' => '👮 Police',
+                'text' => 'Register as a police officer, see issued tickets, and more.',
+                'link' => '/register/police'
+            ],
+            [
+                'title' => '🧑‍⚖️ Judge',
+                'text' => 'Register as a judge, manage ongoing cases, and more.',
+                'link' => '/register/judge'
+            ]
+        ];
+
+        return $data;
+
+    }
+
     function issueTicket() {
         $userInfo = $this->autheticate();
 
@@ -81,7 +119,6 @@ class ProfileController extends Controller
     }
 
 
-
     function registerVehicleForm()
     {
         $userInfo = $this->autheticate();
@@ -93,6 +130,13 @@ class ProfileController extends Controller
         return redirect('login');
     }
 
+    // API
+    function getProfileInfo(Request $req) {
+        $data = DB::table('driver')->where('id', $req->id)->first();
+        return $data;
+    }
+
+    // API
     function getAccType()
     {
         $accType = session()->get('accType');
@@ -100,6 +144,7 @@ class ProfileController extends Controller
         return $accType;
     }
 
+    // API
     function scoreComment(Request $req) {
         $score = $req->score;
 
@@ -128,6 +173,7 @@ class ProfileController extends Controller
         return $data;
     }
 
+    // API
     function registerVehicle(Request $request)
     {
         // $request->validate(
@@ -189,22 +235,20 @@ class ProfileController extends Controller
 
     function updateProfile(Request $request)
     {
-
-        $accType = session()->get('accType');
+        // $accType = session()->get('accType');
+        $accType = $request->accType;
 
         if($accType == 'driver')
         {
             $info = DB::table('driver')
-                ->where('id', session()->get('userInfo')->id)
+                ->where('id', $request->id)
                 ->update([
-                    'NAME' => $request->name,
-                    'NID' => $request->nid,
-                    'LICENSE_NUMBER' => $request->lic,
-                    'LICENSE_ISSUE_DATE' => $request->issue,
-                    'LICENSE_EXPIRY_DATE' => $request->exp,
+                    'NAME' => $request->NAME,
+                    'NID' => $request->NID,
+                    'LICENSE_NUMBER' => $request->LICENSE_NUMBER,
+                    'LICENSE_ISSUE_DATE' => $request->LICENSE_ISSUE_DATE,
+                    'LICENSE_EXPIRY_DATE' => $request->LICENSE_EXPIRY_DATE,
                 ]);
-
-
         }
         else if ($accType == 'police')
         {
@@ -231,13 +275,14 @@ class ProfileController extends Controller
         }
 
         $userInfo = DB::table($accType)
-            ->where('id', session()->get('userInfo')->id)
+            ->where('id', $request->id)
             ->first();
 
         session()->put('userInfo', $userInfo);
 
-        session()->flash('infoChangeSuccess', true);
-        return redirect('profile/update');
+        // session()->flash('infoChangeSuccess', true);
+        // return redirect('profile/update');
+        return response('epic');
     }
 
     function showTickets()

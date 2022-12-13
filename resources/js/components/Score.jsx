@@ -9,7 +9,7 @@ function Score() {
 
     useEffect(async () => {
         const tickets = await window.ticketContractFactory.getActiveTickets(
-            window.driverswallet
+            window.wallet
         );
         console.log("tickets: ", tickets);
 

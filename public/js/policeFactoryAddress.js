@@ -7,7 +7,7 @@
   \**********************************************/
 /***/ ((module) => {
 
-var deployedPoliceFactoryContractAddress = "0xe5d27Aaf2fdbBBC23BdCAF742196D18BEfa6Ce44";
+var deployedPoliceFactoryContractAddress = "0x975229c6fF7456Ad15f0f153cc4650e5A5846DdC";
 module.exports = {
   deployedPoliceFactoryContractAddress: deployedPoliceFactoryContractAddress
 };

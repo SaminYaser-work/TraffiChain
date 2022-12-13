@@ -8772,12 +8772,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x1742BB5eb872E1AE30B7DffC9f1D0e35cC45F832",
-      "transactionHash": "0xd9e70c9b048ca46d20dd82760943989ccebb5be5548795de6bcc52f3a38aa4ee"
+      "address": "0xCccECbF3a4a67FACC7359214044F0CfCEf55eaEC",
+      "transactionHash": "0xb40615c2576d2d3013c14c13944690820c1af5178d31c2f60fdaf20380a13529"
     }
   },
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-12-01T11:58:32.832Z",
+  "updatedAt": "2022-12-13T04:04:23.280Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Samin Yaser",

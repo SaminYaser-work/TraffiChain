@@ -1,9 +1,28 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import logo from "./logo.png";
 
 function Footer() {
+    const [text, setText] = useState("");
+
+    useEffect(() => {
+        var options = {
+            method: "GET",
+            url: "http://127.0.0.1:8000/api/footer",
+        };
+
+        axios
+            .request(options)
+            .then(function (response) {
+                setText(response.data);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }, []);
+
     return (
         <>
             <footer className="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
@@ -49,10 +68,10 @@ function Footer() {
                     </ul>
                 </div>
                 <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-                <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+                <span className="block text-sm text-gray-500 text-center dark:text-gray-400 mt-5">
                     © 2022{" "}
                     <a href={"/home"} className="hover:underline">
-                        TraffiChain™
+                        {text}
                     </a>
                     . All Rights Reserved.
                 </span>

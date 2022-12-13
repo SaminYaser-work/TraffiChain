@@ -13,7 +13,9 @@
 @endsection
 
 @section('content')
-    @if (session()->get('infoChangeSuccess') == true)
+    <div id="updatedriver__react"></div>
+
+    {{-- @if (session()->get('infoChangeSuccess') == true)
         <div class="flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
             role="alert">
             <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
@@ -150,5 +152,5 @@
                 btn.disabled = true;
             }
         });
-    </script>
+    </script> --}}
 @endsection

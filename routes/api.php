@@ -29,6 +29,12 @@ Route::post('create-driver', [RegController::class, 'regDriver']);
 
 // APIs
 Route::get('accType', [ProfileController::class, 'getAccType']);
+Route::get('footer', [ProfileController::class, 'getFooter']);
+Route::get('regtext', [ProfileController::class, 'getRegText']);
+Route::post('profileInfo', [ProfileController::class, 'getProfileInfo']);
+Route::post('driverInfo', [ProfileController::class, 'getDriverInfo']);
+Route::post('vehicleInfo', [ProfileController::class, 'getVehicleInfo']);
+Route::post('updateDriver', [ProfileController::class, 'updateProfile']);
 Route::post('getScoreComment', [ProfileController::class, 'scoreComment']);
 Route::post('submit-issue', [MailController::class, 'send']);
 Route::post('reg-vehicle', [ProfileController::class, 'registerVehicle']);
