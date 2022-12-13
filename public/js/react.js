@@ -2670,6 +2670,11 @@ function RegVehicle() {
       data = _useState2[0],
       setData = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState4 = _slicedToArray(_useState3, 2),
+      errors = _useState4[0],
+      setErrors = _useState4[1];
+
   var msg = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
 
   var handleChange = function handleChange(event) {
@@ -2680,18 +2685,42 @@ function RegVehicle() {
     });
   };
 
+  var handleQuickFill = function handleQuickFill(event) {
+    setData({
+      model: "Buggati Veyron",
+      chassis: "1234567890",
+      "class": "sedan",
+      type: "special"
+    });
+  };
+
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var formData = new FormData(e.target);
     var formDataObj = Object.fromEntries(formData.entries());
+    formDataObj["id"] = window.id;
+
+    if (formDataObj["type"] == "Type") {
+      formDataObj["type"] = "";
+    }
+
+    if (formDataObj["class"] == "Class") {
+      formDataObj["class"] = "";
+    }
+
     setData(formDataObj);
-    console.log(data);
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/reg-vehicle", data).then(function (res) {
+    console.log(formDataObj);
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/reg-vehicle", formDataObj, {
+      headers: {
+        Accept: "application/json"
+      }
+    }).then(function (res) {
       console.log(res);
-    })["catch"](function (err) {
-      console.log(err);
-    })["finally"](function () {
       msg.current.classList.remove("hidden");
+      setErrors({});
+    })["catch"](function (err) {
+      console.log(err.response.data.errors);
+      setErrors(err.response.data.errors);
     });
   };
 
@@ -2724,8 +2753,6 @@ function RegVehicle() {
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
-      action: "/profile/vehicle",
-      method: "POST",
       onSubmit: handleSubmit,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "relative z-0 mb-6 w-full group",
@@ -2734,13 +2761,16 @@ function RegVehicle() {
           name: "model",
           id: "floating_email",
           className: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
-          placeholder: "",
+          placeholder: " ",
           value: data.model || "",
           onChange: handleChange
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           htmlFor: "model",
           className: "peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6",
           children: "Model Name"
+        }), errors.model && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "text-red-500 text-xs",
+          children: errors.model
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "relative z-0 mb-6 w-full group",
@@ -2756,6 +2786,9 @@ function RegVehicle() {
           htmlFor: "chassis",
           className: "peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6",
           children: "Chassis No."
+        }), errors.chassis && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "text-red-500 text-xs",
+          children: errors.chassis
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "grid md:grid-cols-2 md:gap-6",
@@ -2770,10 +2803,12 @@ function RegVehicle() {
             name: "class",
             className: "block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer",
             value: data["class"] || "",
-            onChange: handleChange,
+            onChange: function onChange(e) {
+              handleChange(e);
+            },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
               defaultValue: true,
-              children: "Choose a class"
+              children: "Class"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
               value: "sedan",
               children: "Sedan"
@@ -2787,6 +2822,9 @@ function RegVehicle() {
               value: "suv",
               children: "SUV"
             })]
+          }), errors["class"] && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "text-red-500 text-xs",
+            children: errors["class"]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "relative z-0 mb-6 w-full group",
@@ -2802,7 +2840,7 @@ function RegVehicle() {
             onChange: handleChange,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
               defaultValue: true,
-              children: "Choose a type"
+              children: "Type"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("option", {
               value: "government",
               children: "Government"
@@ -2813,12 +2851,20 @@ function RegVehicle() {
               value: "civilian",
               children: "Civilian"
             })]
+          }), errors.type && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "text-red-500 text-xs",
+            children: errors.type
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
         type: "submit",
         className: "disabled:bg-slate-600 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:cursor-not-allowed",
         children: "Submit"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+        type: "button",
+        className: "disabled:bg-slate-600 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:cursor-not-allowed ml-2",
+        onClick: handleQuickFill,
+        children: "Quick Fill (Demo)"
       })]
     })]
   });
@@ -2903,8 +2949,7 @@ function Score() {
           case 2:
             tickets = _context.sent;
             console.log("tickets: ", tickets);
-            scr = 100 - tickets.length * 10; // const scr = 20;
-
+            scr = 100 - tickets.length * 10;
             setScore(scr);
             options = {
               method: "POST",
@@ -3258,6 +3303,11 @@ function UpdateDriver() {
       driverInfo = _React$useState2[0],
       setDriverInfo = _React$useState2[1];
 
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1__.useState({}),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      errors = _React$useState4[0],
+      setErrors = _React$useState4[1];
+
   var succMsg = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var options = {
@@ -3299,20 +3349,22 @@ function UpdateDriver() {
             case 7:
               res = _context.sent;
               succMsg.current.classList.remove("hidden");
-              _context.next = 14;
+              setErrors({});
+              _context.next = 16;
               break;
 
-            case 11:
-              _context.prev = 11;
+            case 12:
+              _context.prev = 12;
               _context.t0 = _context["catch"](4);
-              console.log(_context.t0);
+              console.log(_context.t0.response.data.errors);
+              setErrors(_context.t0.response.data.errors);
 
-            case 14:
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[4, 11]]);
+      }, _callee, null, [[4, 12]]);
     }));
 
     return function handleSubmit(_x) {
@@ -3364,6 +3416,9 @@ function UpdateDriver() {
           htmlFor: "NAME",
           className: "peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6",
           children: "Name"
+        }), errors.NAME && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "text-red-600 text-xs",
+          children: errors.NAME
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "relative z-0 mb-6 w-full group",
@@ -3379,6 +3434,9 @@ function UpdateDriver() {
           htmlFor: "NID",
           className: "peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6",
           children: "NID"
+        }), errors.NID && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "text-red-600 text-xs",
+          children: errors.NID
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "relative z-0 mb-6 w-full group",
@@ -3394,6 +3452,9 @@ function UpdateDriver() {
           name: "LICENSE_NUMBER",
           className: "peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6",
           children: "License No."
+        }), errors.LICENSE_NUMBER && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "text-red-600 text-xs",
+          children: errors.LICENSE_NUMBER
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "grid md:grid-cols-2 md:gap-6",
@@ -3411,6 +3472,9 @@ function UpdateDriver() {
             name: "LICENSE_ISSUE_DATE",
             className: "peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6",
             children: "License Issue"
+          }), errors.LICENSE_ISSUE_DATE && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "text-red-600 text-xs",
+            children: errors.LICENSE_ISSUE_DATE
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "relative z-0 mb-6 w-full group",
@@ -3426,6 +3490,9 @@ function UpdateDriver() {
             htmlFor: "LICENSE_EXPIRY_DATE",
             className: "peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6",
             children: "License Exp."
+          }), errors.LICENSE_EXPIRY_DATE && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "text-red-600 text-xs",
+            children: errors.LICENSE_EXPIRY_DATE
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -3515,6 +3582,7 @@ function VehicleInfo() {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  console.log(vehicleInfo);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "flex justify-start items-end py-2",

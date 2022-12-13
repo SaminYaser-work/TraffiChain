@@ -14,6 +14,8 @@ function UpdateDriver() {
         SCORE: 0,
     });
 
+    const [errors, setErrors] = React.useState({});
+
     const succMsg = useRef();
 
     useEffect(() => {
@@ -51,8 +53,10 @@ function UpdateDriver() {
         try {
             const res = await axios.post("/api/updateDriver", dataToSend);
             succMsg.current.classList.remove("hidden");
+            setErrors({});
         } catch (err) {
-            console.log(err);
+            console.log(err.response.data.errors);
+            setErrors(err.response.data.errors);
         }
     };
 
@@ -103,11 +107,11 @@ function UpdateDriver() {
                         Name
                     </label>
 
-                    {/* @if ($errors->has('name'))
-                <span className="text-red-600 text-xs">
-                    {{ $errors->first('name') }}
-                </span>
-            @endif */}
+                    {errors.NAME && (
+                        <span className="text-red-600 text-xs">
+                            {errors.NAME}
+                        </span>
+                    )}
                 </div>
 
                 <div className="relative z-0 mb-6 w-full group">
@@ -128,11 +132,11 @@ function UpdateDriver() {
                         NID
                     </label>
 
-                    {/* @if ($errors->has('nid'))
-                <span className="text-red-600 text-xs">
-                    {{ $errors->first('nid') }}
-                </span>
-            @endif */}
+                    {errors.NID && (
+                        <span className="text-red-600 text-xs">
+                            {errors.NID}
+                        </span>
+                    )}
                 </div>
 
                 <div className="relative z-0 mb-6 w-full group">
@@ -153,11 +157,11 @@ function UpdateDriver() {
                         License No.
                     </label>
 
-                    {/* @if ($errors->has('lic'))
-                <span className="text-red-600 text-xs">
-                    {{ $errors->first('lic') }}
-                </span>
-            @endif */}
+                    {errors.LICENSE_NUMBER && (
+                        <span className="text-red-600 text-xs">
+                            {errors.LICENSE_NUMBER}
+                        </span>
+                    )}
                 </div>
 
                 <div className="grid md:grid-cols-2 md:gap-6">
@@ -177,11 +181,12 @@ function UpdateDriver() {
                         >
                             License Issue
                         </label>
-                        {/* @if ($errors->has('issue'))
-                    <span className="text-red-600 text-xs">
-                        {{ $errors->first('issue') }}
-                    </span>
-                @endif */}
+
+                        {errors.LICENSE_ISSUE_DATE && (
+                            <span className="text-red-600 text-xs">
+                                {errors.LICENSE_ISSUE_DATE}
+                            </span>
+                        )}
                     </div>
 
                     <div className="relative z-0 mb-6 w-full group">
@@ -200,11 +205,12 @@ function UpdateDriver() {
                         >
                             License Exp.
                         </label>
-                        {/* @if ($errors->has('exp'))
-                    <span className="text-red-600 text-xs">
-                        {{ $errors->first('exp') }}
-                    </span>
-                @endif */}
+
+                        {errors.LICENSE_EXPIRY_DATE && (
+                            <span className="text-red-600 text-xs">
+                                {errors.LICENSE_EXPIRY_DATE}
+                            </span>
+                        )}
                     </div>
                 </div>
 

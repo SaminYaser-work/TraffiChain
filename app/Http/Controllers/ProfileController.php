@@ -176,15 +176,15 @@ class ProfileController extends Controller
     // API
     function registerVehicle(Request $request)
     {
-        // $request->validate(
-        //     [
-        //         'model' => 'required|min:3|string',
-        //         // 'chassis' => 'required|digits:10|string|unique:App/Models/vehicle,CHASSIS_NUMBER', // TODO: check if unique
-        //         'chassis' => 'required|digits:10|string',
-        //         'class' => 'required|string',
-        //         'type' => 'required|string',
-        //     ]
-        // );
+        $request->validate(
+            [
+                'model' => 'required|min:3|string',
+                // 'chassis' => 'required|digits:10|string|unique:App/Models/vehicle,CHASSIS_NUMBER', // TODO: check if unique
+                'chassis' => 'required|digits:10|string',
+                'class' => 'required|string',
+                'type' => 'required|string',
+            ]
+        );
 
         $uuid = Str::uuid()->toString();
 
@@ -197,7 +197,7 @@ class ProfileController extends Controller
         $vehicle->save();
 
         $reg = new registered_vehicles();
-        $reg->OWNER_ID = session()->get('userInfo')->id;
+        $reg->OWNER_ID = $request->id;
         $reg->REGISTRATION_NUMBER = $uuid;
         $reg->save();
 
@@ -240,6 +240,17 @@ class ProfileController extends Controller
 
         if($accType == 'driver')
         {
+
+            $request->validate(
+                [
+                    'NAME' => 'required|min:3|string',
+                    'NID' => 'required|int|digits:10',
+                    'LICENSE_NUMBER' => 'required|int|digits:15',
+                    'LICENSE_ISSUE_DATE' => 'required|date',
+                    'LICENSE_EXPIRY_DATE' => 'required|date|after:issue',
+                ]
+            );
+
             $info = DB::table('driver')
                 ->where('id', $request->id)
                 ->update([

@@ -102,21 +102,14 @@
                 </h5>
             </div>
 
-
-
-
             <div class="flex justify-center items-center flex-col" id="noTickets">
                 <p>You currently have</p>
                 <div class="grid place-items-center mb-5">
                     <p class="text-6xl lg:text-8xl" id="ticketCounter">
                     </p>
                 </div>
-                <p class="">issued tickets.</p>
-                <p class="text-green-600 hidden" id="goodText">Keep up the good work.</p>
+                <p class="">outstanding tickets.</p>
             </div>
-
-
-
 
             <a href="{{ url('profile/tickets') }}" class="mt-3 inline-flex items-center text-blue-600 hover:underline">
                 <span id="linkText">
@@ -156,13 +149,13 @@
                 ticketCounter.textContent = numOfTickets;
 
                 if (numOfTickets == 0) {
-                    noTickets.classList.add('text-green-600');
+                    noTickets.classList.add('text-green-400');
                     noTickets.classList.remove('text-red-600');
                     linkText.textContent = 'See History';
                     goodText.classList.remove('hidden');
                 } else {
                     noTickets.classList.add('text-red-600');
-                    noTickets.classList.remove('text-green-600');
+                    noTickets.classList.remove('text-green-400');
                     linkText.textContent = 'Resolve Tickets';
                 }
             })();

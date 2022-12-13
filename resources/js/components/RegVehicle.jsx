@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 
 function RegVehicle() {
     const [data, setData] = useState({});
+    const [errors, setErrors] = useState({});
     const msg = useRef();
 
     const handleChange = (event) => {
@@ -12,26 +13,45 @@ function RegVehicle() {
         setData((values) => ({ ...values, [name]: value }));
     };
 
+    const handleQuickFill = (event) => {
+        setData({
+            model: "Buggati Veyron",
+            chassis: "1234567890",
+            class: "sedan",
+            type: "special",
+        });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        const formDataObj = Object.fromEntries(formData.entries());
+        let formDataObj = Object.fromEntries(formData.entries());
+        formDataObj["id"] = window.id;
+
+        if (formDataObj["type"] == "Type") {
+            formDataObj["type"] = "";
+        }
+        if (formDataObj["class"] == "Class") {
+            formDataObj["class"] = "";
+        }
 
         setData(formDataObj);
 
-        console.log(data);
+        console.log(formDataObj);
 
         axios
-            .post("/api/reg-vehicle", data)
+            .post("/api/reg-vehicle", formDataObj, {
+                headers: { Accept: "application/json" },
+            })
             .then((res) => {
                 console.log(res);
+                msg.current.classList.remove("hidden");
+                setErrors({});
             })
             .catch((err) => {
-                console.log(err);
-            })
-            .finally(() => {
-                msg.current.classList.remove("hidden");
+                console.log(err.response.data.errors);
+                setErrors(err.response.data.errors);
             });
     };
 
@@ -62,18 +82,14 @@ function RegVehicle() {
                     </div>
                 </div>
             </div>
-            <form
-                action="/profile/vehicle"
-                method="POST"
-                onSubmit={handleSubmit}
-            >
+            <form onSubmit={handleSubmit}>
                 <div className="relative z-0 mb-6 w-full group">
                     <input
                         type="text"
                         name="model"
                         id="floating_email"
                         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                        placeholder=""
+                        placeholder=" "
                         value={data.model || ""}
                         onChange={handleChange}
                     />
@@ -84,6 +100,12 @@ function RegVehicle() {
                     >
                         Model Name
                     </label>
+
+                    {errors.model && (
+                        <span className="text-red-500 text-xs">
+                            {errors.model}
+                        </span>
+                    )}
                 </div>
 
                 <div className="relative z-0 mb-6 w-full group">
@@ -103,6 +125,12 @@ function RegVehicle() {
                     >
                         Chassis No.
                     </label>
+
+                    {errors.chassis && (
+                        <span className="text-red-500 text-xs">
+                            {errors.chassis}
+                        </span>
+                    )}
                 </div>
 
                 <div className="grid md:grid-cols-2 md:gap-6">
@@ -115,14 +143,21 @@ function RegVehicle() {
                             name="class"
                             className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                             value={data.class || ""}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                                handleChange(e);
+                            }}
                         >
-                            <option defaultValue={true}>Choose a class</option>
+                            <option defaultValue={true}>Class</option>
                             <option value="sedan">Sedan</option>
                             <option value="bus/truck">Bus/Truck</option>
                             <option value="motorbike">Motorbike</option>
                             <option value="suv">SUV</option>
                         </select>
+                        {errors.class && (
+                            <span className="text-red-500 text-xs">
+                                {errors.class}
+                            </span>
+                        )}
                     </div>
 
                     <div className="relative z-0 mb-6 w-full group">
@@ -136,11 +171,16 @@ function RegVehicle() {
                             value={data.type || ""}
                             onChange={handleChange}
                         >
-                            <option defaultValue={true}>Choose a type</option>
+                            <option defaultValue={true}>Type</option>
                             <option value="government">Government</option>
                             <option value="special">Special</option>
                             <option value="civilian">Civilian</option>
                         </select>
+                        {errors.type && (
+                            <span className="text-red-500 text-xs">
+                                {errors.type}
+                            </span>
+                        )}
                     </div>
                 </div>
 
@@ -149,6 +189,14 @@ function RegVehicle() {
                     className="disabled:bg-slate-600 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:cursor-not-allowed"
                 >
                     Submit
+                </button>
+
+                <button
+                    type="button"
+                    className="disabled:bg-slate-600 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:cursor-not-allowed ml-2"
+                    onClick={handleQuickFill}
+                >
+                    Quick Fill (Demo)
                 </button>
             </form>
         </>

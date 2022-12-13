@@ -14,7 +14,6 @@ function Score() {
         console.log("tickets: ", tickets);
 
         const scr = 100 - tickets.length * 10;
-        // const scr = 20;
 
         setScore(scr);
 

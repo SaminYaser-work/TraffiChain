@@ -27,6 +27,8 @@ function VehicleInfo() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
+    console.log(vehicleInfo);
+
     return (
         <>
             <div className="flex justify-start items-end py-2">
