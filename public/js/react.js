@@ -2220,8 +2220,6 @@ function Lab() {
 
 if (document.getElementById("lab")) {
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Lab, {}), document.getElementById("lab"));
-} else {
-  console.log("lab element not found to render react component");
 }
 
 /***/ }),
@@ -2859,9 +2857,12 @@ function Support() {
 
             case 3:
               btn.current.disabled = true;
-              btn.current.innerHTML = "Submitting...";
-              _context.prev = 5;
-              _context.next = 8;
+              btn.current.innerHTML = "Submitting..";
+              console.log(issues, message); // btn.current.disabled = false;
+              // btn.current.innerHTML = "Send Message";
+
+              _context.prev = 6;
+              _context.next = 9;
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/submit-issue", {
                 issues: issues,
                 message: message,
@@ -2869,7 +2870,7 @@ function Support() {
                 nid: window.nid
               });
 
-            case 8:
+            case 9:
               res = _context.sent;
               console.log(res);
 
@@ -2881,26 +2882,26 @@ function Support() {
                 succMsg.current.classList.add("hidden");
               }
 
-              _context.next = 16;
+              _context.next = 17;
               break;
 
-            case 13:
-              _context.prev = 13;
-              _context.t0 = _context["catch"](5);
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](6);
               console.log(_context.t0);
 
-            case 16:
-              _context.prev = 16;
+            case 17:
+              _context.prev = 17;
               btn.current.disabled = false;
               btn.current.innerHTML = "Submit";
-              return _context.finish(16);
+              return _context.finish(17);
 
-            case 20:
+            case 21:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[5, 13, 16, 20]]);
+      }, _callee, null, [[6, 14, 17, 21]]);
     }));
 
     return function handleClick(_x) {
@@ -2971,7 +2972,7 @@ function Support() {
         return setMessage(e.target.value);
       },
       className: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-      placeholder: "I am having trouble with...",
+      placeholder: "Message...",
       value: message
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "grid place-items-center",

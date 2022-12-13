@@ -48,6 +48,4 @@ export default Lab;
 
 if (document.getElementById("lab")) {
     ReactDOM.render(<Lab />, document.getElementById("lab"));
-} else {
-    console.log("lab element not found to render react component");
 }

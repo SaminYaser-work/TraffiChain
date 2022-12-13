@@ -31,13 +31,14 @@ class SendMail extends Mailable
     public function build()
     {
 
-        $userInfo = session()->get('userInfo');
-        $issueID = random_int(0,1000);
-        $this->data['issueID'] = $issueID;
-        $from = $this->data['name'] . '@traffichain.org';
-        $subject = 'Issue ID: ' . $issueID . ' | ' . $this->data['issues'];
+        // $userInfo = session()->get('userInfo');
+        // $issueID = random_int(0,1000);
+        // $this->data['issueID'] = $issueID;
+        // $from = $this->data['name'] . '@traffichain.org';
 
+        $subject = $this->data['first'];
+        $from = $this->data['email'];
 
-        return $this->from($from)->subject($subject)->view('mail-template')->with('data', $this->data);
+        return $this->from($from)->subject($subject)->view('mail-template2')->with('data', $this->data);
     }
 }
