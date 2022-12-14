@@ -34,7 +34,7 @@ function VehicleInfo() {
             <div className="flex justify-start items-end py-2">
                 <svg
                     aria-hidden="true"
-                    className="flex-shrink-0 inline w-10 h-10 mr-3 self-baseline"
+                    className="flex-shrink-0 inline w-8 mr-3 mt-1 self-baseline"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"

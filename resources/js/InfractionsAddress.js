@@ -1,1 +1,1 @@
-const deployedInfractionsContractAddress = "0xCccECbF3a4a67FACC7359214044F0CfCEf55eaEC"; export {deployedInfractionsContractAddress};
+const deployedInfractionsContractAddress = "0xAd7a528Ff6F38546e8eC65165a15aFD193304427"; export {deployedInfractionsContractAddress};

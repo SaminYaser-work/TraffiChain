@@ -55,6 +55,7 @@ function Support() {
             }
         } catch (err) {
             console.log(err);
+            alert("Something went wrong");
         } finally {
             btn.current.disabled = false;
             btn.current.innerHTML = "Submit";

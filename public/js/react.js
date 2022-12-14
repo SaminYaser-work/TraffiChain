@@ -3124,26 +3124,27 @@ function Support() {
                 succMsg.current.classList.add("hidden");
               }
 
-              _context.next = 17;
+              _context.next = 18;
               break;
 
             case 14:
               _context.prev = 14;
               _context.t0 = _context["catch"](6);
               console.log(_context.t0);
+              alert("Something went wrong");
 
-            case 17:
-              _context.prev = 17;
+            case 18:
+              _context.prev = 18;
               btn.current.disabled = false;
               btn.current.innerHTML = "Submit";
-              return _context.finish(17);
+              return _context.finish(18);
 
-            case 21:
+            case 22:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[6, 14, 17, 21]]);
+      }, _callee, null, [[6, 14, 18, 22]]);
     }));
 
     return function handleClick(_x) {
@@ -3588,7 +3589,7 @@ function VehicleInfo() {
       className: "flex justify-start items-end py-2",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("svg", {
         "aria-hidden": "true",
-        className: "flex-shrink-0 inline w-10 h-10 mr-3 self-baseline",
+        className: "flex-shrink-0 inline w-8 mr-3 mt-1 self-baseline",
         fill: "currentColor",
         viewBox: "0 0 20 20",
         xmlns: "http://www.w3.org/2000/svg",
